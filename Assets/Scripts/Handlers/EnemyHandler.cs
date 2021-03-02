@@ -14,9 +14,9 @@ namespace Base.Handler
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rigidBody;
         private WeaponController _weaponController;
-        //private PlayerHandler _playerHandler;
-        //private Vector3 _playerPosition => _playerHandler.transform.position;
+        private Vector3 _playerPosition => PlayerManager.instance.PlayerPosition;
         private bool _isChasing;
+        private bool _isAlive => _enemy.CurrentHealth > 0;
 
         #region Animator Hashes
         private int _chaseHash = Animator.StringToHash("Chase");
@@ -29,10 +29,16 @@ namespace Base.Handler
         public void Init(WeaponController weaponController)
         {
             _weaponController = weaponController;
-            //_playerHandler = playerHandler;
         }
 
         private void Start() {
+        }
+
+        private void Update() {
+            if (!_isAlive)
+                return;
+            
+            AIBehaviour();
         }
 
         private bool IsCriticalHit()
@@ -80,33 +86,43 @@ namespace Base.Handler
             Destroy(gameObject, 5f);
         }
 
-        // private void AIBehaviour()
-        // {
-        //     float distance = Vector3.Distance(_playerPosition, transform.position); //Distancia entre el zombie y el jugador
-        //     Vector3 direction = _playerPosition - this.transform.position;  //Direccion (Vector3) del zombie al jugador
-        //     float angle = Vector3.Angle(direction, this.transform.forward); //Angulo de vision
+        private void AIBehaviour()
+        {
+            float distance = Vector3.Distance(_playerPosition, transform.position); //Distancia entre el zombie y el jugador
+            Vector3 direction = _playerPosition - this.transform.position;  //Direccion (Vector3) del zombie al jugador
+            float angle = Vector3.Angle(direction, this.transform.forward); //Angulo de vision
 
 
-        //     if (distance < _enemy.VisionArea && angle < _enemy.AngleRadius)
-        //     {
-        //         _isChasing = true;
-        //         Debug.Log("Entro en vision");
-        //     }
+            if (distance < _enemy.VisionArea && angle < _enemy.AngleRadius)
+            {
+                _isChasing = true;
+                Debug.Log("Entro en vision");
+            }
 
-        //     //Inicializando variables en el animator.
-        //     if (_enemy.AttackDistance > distance)
-        //         _animator.SetFloat(_atkDistanceHash, distance);
-        //     else
-        //     {
-        //         _animator.SetFloat(_atkDistanceHash, 10f);
-        //     }
+            //Inicializando variables en el animator.
+            if (_enemy.AttackDistance > distance)
+            {
+                Debug.Log("Entro en AttackDistance");
+               // _animator.SetFloat(_atkDistanceHash, distance);
+            }
+            else
+            {
+               // _animator.SetFloat(_atkDistanceHash, 10f);
+            }
 
-        //     if (_enemy.AudibleArea > distance)
-        //     {
-        //         _isChasing = true;
-        //         _agent.isStopped = false;
-        //         _agent.SetDestination(_playerPosition);
-        //     }
-        // }
+            if (_enemy.AudibleArea > distance)
+            {
+                Debug.Log("Entro en AudibleArea");
+                _isChasing = true;
+                _agent.isStopped = false;
+                _agent.SetDestination(_playerPosition);
+            }
+        }
+
+        public virtual void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _enemy.AudibleArea);
+    }
     }
 }
