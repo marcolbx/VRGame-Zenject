@@ -13,29 +13,37 @@ namespace Base.Handler
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rigidBody;
-        private WeaponController _weaponController;
         private Vector3 _playerPosition => PlayerManager.instance.PlayerPosition;
-        private bool _isChasing;
         private bool _isAlive => _enemy.CurrentHealth > 0;
+        private bool _isChasing;
+        private bool _isHurt;
+        private bool _isDefending;
+        #region Zenject
+        private WeaponController _weaponController;
+        private PlayerController _playerController;
+        #endregion
 
         #region Animator Hashes
         private int _chaseHash = Animator.StringToHash("Chase");
         private int _hurtHash = Animator.StringToHash("Hurt");
-        private int _atkDistanceHash = Animator.StringToHash("AttackDistance");
+        private int _defendHash = Animator.StringToHash("Defend");
+        private int _atkDistanceHash = Animator.StringToHash("Attack");
         private int _dieHash = Animator.StringToHash("Die");
         #endregion
 
         [Inject]
-        public void Init(WeaponController weaponController)
+        public void Init(WeaponController weaponController, PlayerController playerController)
         {
             _weaponController = weaponController;
+            _playerController = playerController;
         }
 
         private void Start() {
+            _agent.stoppingDistance = _enemy.AttackDistance - 1;
         }
 
         private void Update() {
-            if (!_isAlive)
+            if (!_isAlive || _isHurt || _isDefending)
                 return;
             
             AIBehaviour();
@@ -59,20 +67,73 @@ namespace Base.Handler
             return false;
         }
 
+        public void InflictDamage()
+        {
+            _playerController.TakeDamage();
+        }
+
         public void TakeDamage()
         {
-            if (_enemy.CurrentHealth > 1)
+            _isHurt = true;
+            _agent.isStopped = true;
+            _animator.ResetTrigger(_atkDistanceHash);
+
+            if (_enemy.CurrentHealth >= 1)
             {
                 if (IsCriticalHit())
-                    _enemy.CurrentHealth -= 3;
-                else
-                    _enemy.CurrentHealth--;
+                {
+                    _isDefending = true;
+                    _animator.SetTrigger(_defendHash);
+                }
+                    _enemy.CurrentHealth -= CalculateDamageToReceive();
+
+                _animator.SetTrigger(_hurtHash);
             }
-            else
+            
+            if(_enemy.CurrentHealth <= 0)
             {
                 _enemy.CurrentHealth = 0;
                 Die();
             }
+        }
+
+        private float CalculateDamageToReceive()
+        {
+            float damage;
+            if (IsCriticalHit())
+            {
+                damage = _weaponController.CurrentGun.Damage * 2;
+            }
+            else
+            {
+                damage = _weaponController.CurrentGun.Damage;
+            }
+
+            if(_isDefending)
+                damage = damage / 2;
+
+            Debug.Log("Damage after calculation: " + damage);
+            return damage;
+        }
+
+        public void IsNotHurt()
+        {
+            if (!_isAlive)
+                return;
+
+            _isHurt = false;
+
+            if (!_isDefending)
+                _agent.isStopped = false;
+        }
+
+        public void IsNotDefending()
+        {
+            if(!_isAlive)
+                return;
+
+            _isDefending = false;
+            _agent.isStopped = false;
         }
 
         public void Die()
@@ -81,6 +142,11 @@ namespace Base.Handler
             Destroy(_agent);
 
             _collider.enabled = false;
+            _animator.ResetTrigger(_hurtHash);
+            _animator.ResetTrigger(_atkDistanceHash);
+            _animator.ResetTrigger(_chaseHash);
+            _animator.ResetTrigger(_defendHash);
+
             _animator.SetTrigger(_dieHash);
 
             Destroy(gameObject, 5f);
@@ -103,26 +169,29 @@ namespace Base.Handler
             if (_enemy.AttackDistance > distance)
             {
                 Debug.Log("Entro en AttackDistance");
-               // _animator.SetFloat(_atkDistanceHash, distance);
+                _isChasing = false;
+               _animator.SetTrigger(_atkDistanceHash);
             }
             else
             {
-               // _animator.SetFloat(_atkDistanceHash, 10f);
+               _animator.ResetTrigger(_atkDistanceHash);
             }
 
-            if (_enemy.AudibleArea > distance)
+            if (_enemy.AudibleArea > distance && distance > _enemy.AttackDistance)
             {
-                Debug.Log("Entro en AudibleArea");
+                Debug.Log("AudibleArea");
                 _isChasing = true;
                 _agent.isStopped = false;
                 _agent.SetDestination(_playerPosition);
             }
+
+            _animator.SetBool(_chaseHash, _isChasing);
         }
 
         public virtual void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _enemy.AudibleArea);
-    }
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _enemy.AudibleArea);
+        }
     }
 }

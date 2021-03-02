@@ -1,3 +1,4 @@
+using System.Text;
 using Base.Controller;
 using Base.Signal;
 using TMPro;
@@ -8,15 +9,18 @@ namespace Base.View
 {
     public class WeaponView : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
+
         private WeaponController _weaponController;
         
         [Inject]
-        public void Init(WeaponController _weaponController, SignalBus bus)
+        public void Init(WeaponController weaponController, SignalBus bus)
         {
-            bus.Subscribe<WeaponShoot>(OnWeaponShootRefreshText);
+            _weaponController = weaponController;
+            bus.Subscribe<WeaponShoot>(OnWeaponActionRefreshText);
+            bus.Subscribe<WeaponReload>(OnWeaponActionRefreshText);
         }
 
-        private void OnWeaponShootRefreshText()
+        private void OnWeaponActionRefreshText()
         {
             _textMeshProUGUI.text = _weaponController.CurrentGun.CurrentAmmo.ToString();
         }

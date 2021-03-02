@@ -16,6 +16,7 @@ public class DefaultInstaller : MonoInstaller
     private void BindControllers()
     {
         Container.BindInterfacesAndSelfTo<WeaponController>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
         Container.BindInterfacesAndSelfTo<SceneTransitionHandler>().AsSingle();
     }
 
@@ -23,10 +24,14 @@ public class DefaultInstaller : MonoInstaller
     {
         Container.Bind<WeaponInventory>().AsSingle();
         Container.Bind<Handgun>().AsSingle().NonLazy();
+        Container.Bind<Shotgun>().AsSingle().NonLazy();
+        Container.Bind<Player>().AsSingle().NonLazy();
     }
 
     private void DeclareSignals()
     {
         Container.DeclareSignal<WeaponShoot>();
+        Container.DeclareSignal<WeaponReload>();
+        Container.DeclareSignal<PlayerDamaged>();
     }
 }

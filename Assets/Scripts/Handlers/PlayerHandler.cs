@@ -28,7 +28,10 @@ namespace Base.Handler
         Debug.DrawRay(transform.position, forward, Color.green); // if debug only TODO create scripting symbol
 
             if (!_weaponController.CanShoot())
+            {
+                _weaponController.Reload();
                 return;
+            }
 
             if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetButtonDown("Fire1"))
             {

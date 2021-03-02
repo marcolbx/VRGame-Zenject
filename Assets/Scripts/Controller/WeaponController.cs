@@ -1,32 +1,28 @@
 using System.Threading.Tasks;
 using Base.Model;
 using Base.Signal;
-using UnityEngine;
 using Zenject;
 
 namespace Base.Controller
 {
-    public enum GunType
-    {
-        Handgun,
-        Shotgun,
-        Machinegun
-    }
-
     public class WeaponController
     {
         private SignalBus _bus;
-        private WeaponInventory _inventory;
-        public IGun CurrentGun {get; private set;}
+        public WeaponInventory Inventory { get; private set; }
+        public IGun CurrentGun { get; private set; }
         private Handgun _handgun;
+        private Shotgun _shotgun;
         public bool IsPlayerReloading {get; private set;}
 
-        public WeaponController(WeaponInventory inventory, Handgun handgun, SignalBus bus)
+        public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, SignalBus bus)
         {
             _bus = bus;
-            _inventory = inventory;
+            Inventory = inventory;
             _handgun = handgun;
-            _handgun.CurrentAmmo = 10;
+            _shotgun = shotgun;
+            _handgun.CurrentAmmo = 10; //TODO change
+            _shotgun.CurrentAmmo = 10; // TODO change
+            Inventory.HandgunAmmo = 12; //TODO change;
             CurrentGun = _handgun;
         }
 
@@ -39,24 +35,24 @@ namespace Base.Controller
         {
             if (!CanShoot())
                 return;
-            
+
+             CurrentGun.Shoot();
             _bus.Fire(new WeaponShoot());
-            CurrentGun.Shoot();
         }
 
         public void GainAmmo(GunType gun)
         {
             if (GunType.Handgun == gun)
             {
-                _inventory.HandgunAmmo += 5;
+                Inventory.HandgunAmmo += 5;
             }
             else if (GunType.Shotgun == gun)
             {
-                _inventory.ShotgunAmmo += 2;
+                Inventory.ShotgunAmmo += 2;
             }
             else
             {
-                _inventory.MachinegunAmmo += 3;
+                Inventory.MachinegunAmmo += 3;
             }
         }
 
@@ -67,15 +63,15 @@ namespace Base.Controller
 
             if (GunType.Handgun == CurrentGun.GunType)
             {
-                return _inventory.HandgunAmmo > 0;
+                return Inventory.HandgunAmmo > 0;
             }
             else if (GunType.Shotgun == CurrentGun.GunType)
             {
-                return _inventory.ShotgunAmmo > 0;
+                return Inventory.ShotgunAmmo > 0;
             }
             else
             {
-                return _inventory.MachinegunAmmo > 0;
+                return Inventory.MachinegunAmmo > 0;
             }
         }
 
@@ -96,7 +92,6 @@ namespace Base.Controller
             {
                 ReloadMachinegun();
             }
-
             IsPlayerReloading = true;
             DoReload();
         }
@@ -105,47 +100,48 @@ namespace Base.Controller
         {
             await Task.Delay(1000); // TODO reload based on gun time
             IsPlayerReloading = false;
+            _bus.Fire(new WeaponReload());
         }
 
         private void ReloadHandgun()
         {
-            if (_inventory.HandgunAmmo >= CurrentGun.MaxAmmo)
+            if (Inventory.HandgunAmmo >= CurrentGun.MaxAmmo)
             {
                 CurrentGun.CurrentAmmo = CurrentGun.MaxAmmo;
-                _inventory.HandgunAmmo -= CurrentGun.MaxAmmo;
+                Inventory.HandgunAmmo -= CurrentGun.MaxAmmo;
             }
             else
             {
-                CurrentGun.CurrentAmmo = _inventory.HandgunAmmo;
-                _inventory.HandgunAmmo = 0;
+                CurrentGun.CurrentAmmo = Inventory.HandgunAmmo;
+                Inventory.HandgunAmmo = 0;
             }
         }
 
         private void ReloadShotgun()
         {
-            if (_inventory.ShotgunAmmo >= CurrentGun.MaxAmmo)
+            if (Inventory.ShotgunAmmo >= CurrentGun.MaxAmmo)
             {
                 CurrentGun.CurrentAmmo = CurrentGun.MaxAmmo;
-                _inventory.ShotgunAmmo -= CurrentGun.MaxAmmo;
+                Inventory.ShotgunAmmo -= CurrentGun.MaxAmmo;
             }
             else
             {
-                CurrentGun.CurrentAmmo = _inventory.ShotgunAmmo;
-                _inventory.ShotgunAmmo = 0;
+                CurrentGun.CurrentAmmo = Inventory.ShotgunAmmo;
+                Inventory.ShotgunAmmo = 0;
             }
         }
 
         private void ReloadMachinegun()
         {
-            if (_inventory.MachinegunAmmo >= CurrentGun.MaxAmmo)
+            if (Inventory.MachinegunAmmo >= CurrentGun.MaxAmmo)
             {
                 CurrentGun.CurrentAmmo = CurrentGun.MaxAmmo;
-                _inventory.MachinegunAmmo -= CurrentGun.MaxAmmo;
+                Inventory.MachinegunAmmo -= CurrentGun.MaxAmmo;
             }
             else
             {
-                CurrentGun.CurrentAmmo = _inventory.MachinegunAmmo;
-                _inventory.MachinegunAmmo = 0;
+                CurrentGun.CurrentAmmo = Inventory.MachinegunAmmo;
+                Inventory.MachinegunAmmo = 0;
             }
         }
 
@@ -155,6 +151,11 @@ namespace Base.Controller
                 return;
 
             CurrentGun = gun;
+        }
+
+        public void ChangeToShotgun()
+        {
+            ChangeWeapon(_shotgun);
         }
     }
 }
