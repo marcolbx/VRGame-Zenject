@@ -1,5 +1,6 @@
 using Base.Controller;
 using Base.Model;
+using Base.Signal;
 using Zenject;
 
 public class DefaultInstaller : MonoInstaller
@@ -9,6 +10,7 @@ public class DefaultInstaller : MonoInstaller
         SignalBusInstaller.Install(Container);
         BindModels();
         BindControllers();
+        DeclareSignals();
     }
 
     private void BindControllers()
@@ -20,6 +22,11 @@ public class DefaultInstaller : MonoInstaller
     private void BindModels()
     {
         Container.Bind<WeaponInventory>().AsSingle();
-        Container.Bind<Handgun>().AsSingle();
+        Container.Bind<Handgun>().AsSingle().NonLazy();
+    }
+
+    private void DeclareSignals()
+    {
+        Container.DeclareSignal<WeaponShoot>();
     }
 }

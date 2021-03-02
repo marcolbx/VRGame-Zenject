@@ -17,18 +17,21 @@ namespace Base.Controller
         private SignalBus _bus;
         private WeaponInventory _inventory;
         public IGun CurrentGun {get; private set;}
+        private Handgun _handgun;
         public bool IsPlayerReloading {get; private set;}
 
-        public WeaponController(WeaponInventory inventory, IGun gun, SignalBus bus)
+        public WeaponController(WeaponInventory inventory, Handgun handgun, SignalBus bus)
         {
             _bus = bus;
             _inventory = inventory;
-            CurrentGun = gun;
+            _handgun = handgun;
+            _handgun.CurrentAmmo = 10;
+            CurrentGun = _handgun;
         }
 
-        private bool CanShoot()
+        public bool CanShoot()
         {
-            return CurrentGun.IsMagazineEmpty;
+            return !CurrentGun.IsMagazineEmpty;
         }
 
         public void Shoot()

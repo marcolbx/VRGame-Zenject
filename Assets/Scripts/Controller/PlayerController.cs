@@ -7,25 +7,25 @@ namespace Base.Controller
 {
     public class PlayerController : IDamageable
     {
-        private Model.Player _player;
+        public Model.Player Player { get; private set; }
         private SignalBus _bus;
 
         public PlayerController(Player player, SignalBus bus)
         {
-            _player = player;
+            Player = player;
             _bus = bus;
         }
 
         public void TakeDamage()
         {
-            if (_player.CurrentHealth > 0)
+            if (Player.CurrentHealth > 0)
             {
-                _player.CurrentHealth -= 1;
+                Player.CurrentHealth -= 1;
                 _bus.Fire(new PlayerDamaged());
             }
             else
             {
-                _player.CurrentHealth = 0;
+                Player.CurrentHealth = 0;
                 _bus.Fire(new PlayerDied());
             }
         }

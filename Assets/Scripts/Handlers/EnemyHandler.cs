@@ -25,6 +25,11 @@ namespace Base.Handler
             _animator.SetTrigger("Die");
         }
 
+        public EnemyType GetEnemyType()
+        {
+            return _enemy.ColorType;
+        }
+
         private bool IsCriticalHit()
         {
             if (_weaponController.CurrentGun.GunType == GunType.Handgun && _enemy.ColorType == EnemyType.Red)
@@ -58,7 +63,12 @@ namespace Base.Handler
 
         public void Die()
         {
-            // TODO die method
+            _animator.SetTrigger("Die");
+        }
+
+        public void StopAnimator()
+        {
+            
         }
     }
 }
