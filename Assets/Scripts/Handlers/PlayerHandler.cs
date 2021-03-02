@@ -24,10 +24,11 @@ namespace Base.Handler
             if (_weaponController.IsPlayerReloading)
                 return;
 
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
-            // if (!_weaponController.CanShoot())
-            //     return;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10; // if debug only
+        Debug.DrawRay(transform.position, forward, Color.green); // if debug only TODO create scripting symbol
+
+            if (!_weaponController.CanShoot())
+                return;
 
             if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetButtonDown("Fire1"))
             {
@@ -38,7 +39,6 @@ namespace Base.Handler
                     EnemyHandler enemy = hit.transform.GetComponent<EnemyHandler>();
                     if (enemy != null)
                     {
-                        Debug.Log("Enemy != null");
                         _weaponController.Shoot();
                         enemy.TakeDamage();
                     }
