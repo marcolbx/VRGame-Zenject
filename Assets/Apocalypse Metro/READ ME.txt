@@ -1,0 +1,18 @@
+Thanks for purchasing the Apocalyptic Metro asset pack!
+
+To add post processing effects found in the trailer video, please import the offical unity post processing stack and okace the CC file found under "post processing" folder onto your camera.
+
+https://assetstore.unity.com/packages/essentials/post-processing-stack-83912
+
+The package can be found at the link above. This is not a requirement but should help you on your way creating the demo scene.
+
+Thanks and for support contact the mail found below
+
+hello@cjgstudio.com
+
+v1.0
+Initial Upload
+
+v1.1
+Added in window to station
+
