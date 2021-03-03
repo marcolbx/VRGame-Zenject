@@ -13,6 +13,8 @@ namespace Base.Handler
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rigidBody;
+        [SerializeField] private AudioSource _hurtAudio;
+        [SerializeField] private AudioSource _dieAudio;
         private Vector3 _playerPosition => PlayerManager.instance.PlayerPosition;
         private bool _isAlive => _enemy.CurrentHealth > 0;
         private bool _isChasing;
@@ -75,6 +77,7 @@ namespace Base.Handler
 
         public void TakeDamage()
         {
+            _hurtAudio.Play();
             _isHurt = true;
             _agent.isStopped = true;
             _animator.ResetTrigger(_atkDistanceHash);
@@ -139,6 +142,7 @@ namespace Base.Handler
 
         public void Die()
         {
+            _dieAudio.Play();
             Destroy(_rigidBody);
             Destroy(_agent);
 
