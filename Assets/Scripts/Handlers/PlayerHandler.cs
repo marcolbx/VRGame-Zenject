@@ -6,6 +6,7 @@ namespace Base.Handler
 {
     public class PlayerHandler : MonoBehaviour
     {
+        [SerializeField] private WeaponsHandler _weaponsHandler;
         private WeaponController _weaponController;
         private Camera _camera;
         private int _layerMask;
@@ -42,6 +43,7 @@ namespace Base.Handler
                     EnemyHandler enemy = hit.transform.GetComponent<EnemyHandler>();
                     if (enemy != null)
                     {
+                        _weaponsHandler.PlayGunShot();
                         _weaponController.Shoot();
                         enemy.TakeDamage();
                     }

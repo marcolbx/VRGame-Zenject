@@ -11,4 +11,8 @@ namespace Base.Signal
     public struct WeaponEquipped
     {
     }
+
+    public struct WeaponAmmoGained
+    {
+    }
 }

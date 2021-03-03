@@ -17,6 +17,7 @@ namespace Base.View
         {
             _weaponController = weaponController;
             bus.Subscribe<WeaponReload>(RefreshAmmoText);
+            bus.Subscribe<WeaponAmmoGained>(RefreshAmmoText);
             RefreshAmmoText();
         }
 

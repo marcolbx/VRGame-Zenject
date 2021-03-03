@@ -34,6 +34,7 @@ public class DefaultInstaller : MonoInstaller
         Container.DeclareSignal<WeaponShoot>();
         Container.DeclareSignal<WeaponReload>();
         Container.DeclareSignal<WeaponEquipped>();
+        Container.DeclareSignal<WeaponAmmoGained>();
         Container.DeclareSignal<PlayerDamaged>();
     }
 }

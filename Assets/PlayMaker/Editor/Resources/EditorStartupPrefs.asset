@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5210ce93b60c74b910290c522cd727, type: 3}
   m_Name: EditorStartupPrefs
   m_EditorClassIdentifier: 
-  welcomeScreenVersion: 
+  welcomeScreenVersion: '1.9.1 '
   playmakerVersion: 
   showWelcomeScreen: 1
   showUpgradeGuide: 0
-  lastAutoUpdateSignature: 
+  lastAutoUpdateSignature: 2020.2.6f1__C:/Users/marco/OneDrive/Documents/GitHub/VR
+    Zenject/VRGame-Zenject/Assets__0.0.0.0
   useLegacyNetworking: 0

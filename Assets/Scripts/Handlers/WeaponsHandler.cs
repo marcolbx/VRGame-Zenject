@@ -10,8 +10,10 @@ namespace Base.Handler
     {
         [SerializeField] private List<GameObject> _weapons = new List<GameObject>(3);
         [SerializeField] private List<Sprite> _crosshairs = new List<Sprite>(3);
+        [SerializeField] private List<AudioClip> _gunShots = new List<AudioClip>(3);
         [SerializeField] private Image _crosshair;
         [SerializeField] private AudioSource _changingWeaponSound;
+        [SerializeField] private AudioSource _shootingSound;
         private WeaponController _weaponController;
 
         [Inject]
@@ -20,17 +22,33 @@ namespace Base.Handler
             _weaponController = weaponController;
         }
 
+        private void Start() {
+            _shootingSound.clip = _gunShots[0];
+        }
+
         private void Update() {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyUp(KeyCode.Alpha1))
             {
+                if (_weapons[0].activeSelf)
+                    return;
+
+                _changingWeaponSound.Play();
                 EquipHandgun();
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyUp(KeyCode.Alpha2))
             {
+                if (_weapons[1].activeSelf)
+                    return;
+
+                _changingWeaponSound.Play();
                 EquipShotgun();
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            else if (Input.GetKeyUp(KeyCode.Alpha3))
             {
+                if (_weapons[2].activeSelf)
+                    return;
+
+                _changingWeaponSound.Play();
                 EquipMachinegun();
             }
         }
@@ -48,6 +66,7 @@ namespace Base.Handler
                     _weapons[i].SetActive(false);
             }
 
+            _shootingSound.clip = _gunShots[0];
             _weaponController.ChangeToHandgun();
         }
         public void EquipShotgun()
@@ -63,6 +82,7 @@ namespace Base.Handler
                     _weapons[i].SetActive(false);
             }
 
+            _shootingSound.clip = _gunShots[1];
             _weaponController.ChangeToShotgun();
         }
 
@@ -79,7 +99,13 @@ namespace Base.Handler
                     _weapons[i].SetActive(false);
             }
 
+            _shootingSound.clip = _gunShots[2];
             _weaponController.ChangeToMachinegun();
+        }
+
+        public void PlayGunShot()
+        {
+            _shootingSound.Play();
         }
     }
 }
