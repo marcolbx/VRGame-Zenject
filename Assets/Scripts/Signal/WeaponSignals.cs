@@ -7,4 +7,8 @@ namespace Base.Signal
     public struct WeaponReload
     {
     }
+
+    public struct WeaponEquipped
+    {
+    }
 }

@@ -8,7 +8,7 @@ namespace Base.Handler
     {
         private WeaponController _weaponController;
         private Camera _camera;
-        private int layerMask;
+        private int _layerMask;
 
         [Inject]
         public void Init(WeaponController weaponController)
@@ -24,8 +24,8 @@ namespace Base.Handler
             if (_weaponController.IsPlayerReloading)
                 return;
 
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10; // if debug only
-        Debug.DrawRay(transform.position, forward, Color.green); // if debug only TODO create scripting symbol
+            Vector3 forward = transform.TransformDirection(Vector3.forward) * 10; // if debug only
+            Debug.DrawRay(transform.position, forward, Color.green); // if debug only TODO create scripting symbol
 
             if (!_weaponController.CanShoot())
             {

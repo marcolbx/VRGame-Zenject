@@ -18,6 +18,7 @@ namespace Base.Handler
         private bool _isChasing;
         private bool _isHurt;
         private bool _isDefending;
+        private bool _isFarAway;
         #region Zenject
         private WeaponController _weaponController;
         private PlayerController _playerController;
@@ -78,19 +79,20 @@ namespace Base.Handler
             _agent.isStopped = true;
             _animator.ResetTrigger(_atkDistanceHash);
 
-            if (_enemy.CurrentHealth >= 1)
+            if (_isAlive)
             {
+                _enemy.CurrentHealth -= CalculateDamageToReceive();
+
                 if (IsCriticalHit())
                 {
-                    _isDefending = true;
                     _animator.SetTrigger(_defendHash);
+                    _isDefending = true;
                 }
-                    _enemy.CurrentHealth -= CalculateDamageToReceive();
-
-                _animator.SetTrigger(_hurtHash);
+                else
+                    _animator.SetTrigger(_hurtHash);
             }
             
-            if(_enemy.CurrentHealth <= 0)
+            if(!_isAlive)
             {
                 _enemy.CurrentHealth = 0;
                 Die();
@@ -112,7 +114,6 @@ namespace Base.Handler
             if(_isDefending)
                 damage = damage / 2;
 
-            Debug.Log("Damage after calculation: " + damage);
             return damage;
         }
 
@@ -127,7 +128,7 @@ namespace Base.Handler
                 _agent.isStopped = false;
         }
 
-        public void IsNotDefending()
+        public void StopDefenseMode()
         {
             if(!_isAlive)
                 return;
@@ -158,17 +159,29 @@ namespace Base.Handler
             Vector3 direction = _playerPosition - this.transform.position;  //Direccion (Vector3) del zombie al jugador
             float angle = Vector3.Angle(direction, this.transform.forward); //Angulo de vision
 
+            if (distance > _enemy.VisionArea && distance > _enemy.AudibleArea)
+            {
+                if (_isFarAway)
+                    return;
+
+                _isFarAway = true;
+                _isChasing = false;
+                _agent.isStopped = true;
+                _animator.SetBool(_chaseHash, _isChasing);
+                return;
+            }
+            else
+                _isFarAway = false;
 
             if (distance < _enemy.VisionArea && angle < _enemy.AngleRadius)
             {
+                Debug.Log("Vision");
                 _isChasing = true;
-                Debug.Log("Entro en vision");
             }
 
-            //Inicializando variables en el animator.
             if (_enemy.AttackDistance > distance)
             {
-                Debug.Log("Entro en AttackDistance");
+                Debug.Log("AttackDistance");
                 _isChasing = false;
                _animator.SetTrigger(_atkDistanceHash);
             }
@@ -186,12 +199,6 @@ namespace Base.Handler
             }
 
             _animator.SetBool(_chaseHash, _isChasing);
-        }
-
-        public virtual void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _enemy.AudibleArea);
         }
     }
 }

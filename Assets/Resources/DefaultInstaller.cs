@@ -25,6 +25,7 @@ public class DefaultInstaller : MonoInstaller
         Container.Bind<WeaponInventory>().AsSingle();
         Container.Bind<Handgun>().AsSingle().NonLazy();
         Container.Bind<Shotgun>().AsSingle().NonLazy();
+        Container.Bind<Machinegun>().AsSingle().NonLazy();
         Container.Bind<Player>().AsSingle().NonLazy();
     }
 
@@ -32,6 +33,7 @@ public class DefaultInstaller : MonoInstaller
     {
         Container.DeclareSignal<WeaponShoot>();
         Container.DeclareSignal<WeaponReload>();
+        Container.DeclareSignal<WeaponEquipped>();
         Container.DeclareSignal<PlayerDamaged>();
     }
 }

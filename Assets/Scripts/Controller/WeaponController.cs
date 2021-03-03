@@ -12,17 +12,21 @@ namespace Base.Controller
         public IGun CurrentGun { get; private set; }
         private Handgun _handgun;
         private Shotgun _shotgun;
+        private Machinegun _machinegun;
         public bool IsPlayerReloading {get; private set;}
 
-        public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, SignalBus bus)
+        public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, Machinegun machinegun, SignalBus bus)
         {
             _bus = bus;
             Inventory = inventory;
             _handgun = handgun;
             _shotgun = shotgun;
-            _handgun.CurrentAmmo = 10; //TODO change
-            _shotgun.CurrentAmmo = 10; // TODO change
+            _machinegun = machinegun;
+
+            _handgun.CurrentAmmo = _handgun.MaxAmmo;
+            _shotgun.CurrentAmmo = _shotgun.MaxAmmo;
             Inventory.HandgunAmmo = 12; //TODO change;
+
             CurrentGun = _handgun;
         }
 
@@ -151,11 +155,22 @@ namespace Base.Controller
                 return;
 
             CurrentGun = gun;
+
+            _bus.Fire(new WeaponEquipped());
         }
 
+        public void ChangeToHandgun()
+        {
+            ChangeWeapon(_handgun);
+        }
         public void ChangeToShotgun()
         {
             ChangeWeapon(_shotgun);
+        }
+
+        public void ChangeToMachinegun()
+        {
+            ChangeWeapon(_machinegun);
         }
     }
 }
