@@ -44,7 +44,7 @@ namespace Base.Handler
 #endif
         public void EquipHandgun()
         {
-            if (_weapons[0].activeSelf)
+            if (_weapons[0].activeSelf || _weaponController.IsPlayerReloading)
                 return;
 
             _changingWeaponSound.Play();
@@ -65,7 +65,7 @@ namespace Base.Handler
         }
         public void EquipShotgun()
         {
-            if (_weapons[1].activeSelf)
+            if (_weapons[1].activeSelf || _weaponController.IsPlayerReloading)
                 return;
 
             _changingWeaponSound.Play();
@@ -87,7 +87,7 @@ namespace Base.Handler
 
         public void EquipMachinegun()
         {
-            if (_weapons[2].activeSelf)
+            if (_weapons[2].activeSelf || _weaponController.IsPlayerReloading)
                 return;
 
             _changingWeaponSound.Play();
