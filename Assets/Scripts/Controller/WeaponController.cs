@@ -97,6 +97,7 @@ namespace Base.Controller
                 ReloadMachinegun();
             }
             IsPlayerReloading = true;
+            _bus.Fire(new WeaponReloadStart());
             DoReload();
         }
 
@@ -104,7 +105,7 @@ namespace Base.Controller
         {
             await Task.Delay(1000); // TODO reload based on gun time
             IsPlayerReloading = false;
-            _bus.Fire(new WeaponReload());
+            _bus.Fire(new WeaponReloaded());
         }
 
         private void ReloadHandgun()

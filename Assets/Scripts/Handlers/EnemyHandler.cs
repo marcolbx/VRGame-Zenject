@@ -153,7 +153,7 @@ namespace Base.Handler
             _animator.ResetTrigger(_defendHash);
 
             _animator.SetTrigger(_dieHash);
-
+            _playerController.ObtainExperience();
             Destroy(gameObject, 5f);
         }
 

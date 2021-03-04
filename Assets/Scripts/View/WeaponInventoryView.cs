@@ -16,7 +16,7 @@ namespace Base.View
         public void Init(WeaponController weaponController, SignalBus bus)
         {
             _weaponController = weaponController;
-            bus.Subscribe<WeaponReload>(RefreshAmmoText);
+            bus.Subscribe<WeaponReloaded>(RefreshAmmoText);
             bus.Subscribe<WeaponAmmoGained>(RefreshAmmoText);
             RefreshAmmoText();
         }

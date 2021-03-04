@@ -6,7 +6,8 @@ namespace Base.Model
     {
         Blue,
         Red,
-        Green
+        Green,
+        Purple
     }
 
     public class Enemy : MonoBehaviour

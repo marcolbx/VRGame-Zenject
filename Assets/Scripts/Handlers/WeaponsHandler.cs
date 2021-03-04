@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Base.Controller;
+using Base.Signal;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -14,12 +15,14 @@ namespace Base.Handler
         [SerializeField] private Image _crosshair;
         [SerializeField] private AudioSource _changingWeaponSound;
         [SerializeField] private AudioSource _shootingSound;
+        [SerializeField] private AudioSource _reloadSound;
         private WeaponController _weaponController;
 
         [Inject]
-        public void Init(WeaponController weaponController)
+        public void Init(WeaponController weaponController, SignalBus bus)
         {
             _weaponController = weaponController;
+            bus.Subscribe<WeaponReloadStart>(OnReloadStart);
         }
 
         private void Start() {
@@ -110,6 +113,11 @@ namespace Base.Handler
         public void PlayGunShot()
         {
             _shootingSound.Play();
+        }
+
+        public void OnReloadStart()
+        {
+            _reloadSound.Play();
         }
     }
 }

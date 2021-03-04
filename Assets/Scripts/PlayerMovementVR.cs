@@ -4,7 +4,7 @@ public class PlayerMovementVR : MonoBehaviour
 {
     [SerializeField] private PlayerMotor _playerMotor;
     [SerializeField] private Transform _camera;
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float _speed = 3f;
     private float _movebool = 0;
     private bool _mobileInput => Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
     private bool _editorInput => Input.GetButtonDown("Fire1");
@@ -47,7 +47,7 @@ public class PlayerMovementVR : MonoBehaviour
     private void ApplyMovement()
     {
         Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
-        Vector3 _velocity2 = forward * speed * _movebool;
+        Vector3 _velocity2 = forward * _speed * _movebool;
 
         _playerMotor.Move(_velocity2);
 

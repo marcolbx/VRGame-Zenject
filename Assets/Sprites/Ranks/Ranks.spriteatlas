@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ranks
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 3055f0c2659a190479bde7d1ec0c1307, type: 3}
+    - {fileID: 2800000, guid: 23e8f9ad542e5f449a785cb308e75ca5, type: 3}
+    - {fileID: 2800000, guid: 0c15bdf676824e84f935782c161a8fb1, type: 3}
+    - {fileID: 2800000, guid: 9d72bda79f6916f459bd64ca8dce6518, type: 3}
+    - {fileID: 2800000, guid: b6cd2615cef41a048b5cb168c3380f47, type: 3}
+    - {fileID: 2800000, guid: cdd00c97ef44f524b875dd583ad12905, type: 3}
+    - {fileID: 2800000, guid: 5108e69e79310af42a479150e085c47e, type: 3}
+    - {fileID: 2800000, guid: c1feaa1770b7f8146810daa310d084bd, type: 3}
+    - {fileID: 2800000, guid: 201206116ceb90c41884961a22154605, type: 3}
+    totalSpriteSurfaceArea: 36864
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 201206116ceb90c41884961a22154605, type: 3}
+  - {fileID: 21300000, guid: 3055f0c2659a190479bde7d1ec0c1307, type: 3}
+  - {fileID: 21300000, guid: b6cd2615cef41a048b5cb168c3380f47, type: 3}
+  - {fileID: 21300000, guid: 0c15bdf676824e84f935782c161a8fb1, type: 3}
+  - {fileID: 21300000, guid: c1feaa1770b7f8146810daa310d084bd, type: 3}
+  - {fileID: 21300000, guid: cdd00c97ef44f524b875dd583ad12905, type: 3}
+  - {fileID: 21300000, guid: 9d72bda79f6916f459bd64ca8dce6518, type: 3}
+  - {fileID: 21300000, guid: 23e8f9ad542e5f449a785cb308e75ca5, type: 3}
+  - {fileID: 21300000, guid: 5108e69e79310af42a479150e085c47e, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - rank008
+  - rank000
+  - rank004
+  - rank002
+  - rank007
+  - rank005
+  - rank003
+  - rank001
+  - rank006
+  m_RenderDataMap: {}
+  m_Tag: Ranks
+  m_IsVariant: 0

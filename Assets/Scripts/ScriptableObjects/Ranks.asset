@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5499cade1191e439f1cb54c8a09b4b, type: 3}
+  m_Name: Ranks
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnManagerScriptableObject
+  Rank:
+  - Recruit
+  - Apprentice
+  - Private
+  - Corporal
+  - Sergeant
+  - Gunnery Sergeant
+  - Lieutenant
+  - Captain
+  - Major
+  RankIcon:
+  - {fileID: 21300000, guid: 3055f0c2659a190479bde7d1ec0c1307, type: 3}
+  - {fileID: 21300000, guid: 23e8f9ad542e5f449a785cb308e75ca5, type: 3}
+  - {fileID: 21300000, guid: 0c15bdf676824e84f935782c161a8fb1, type: 3}
+  - {fileID: 21300000, guid: 9d72bda79f6916f459bd64ca8dce6518, type: 3}
+  - {fileID: 21300000, guid: b6cd2615cef41a048b5cb168c3380f47, type: 3}
+  - {fileID: 21300000, guid: cdd00c97ef44f524b875dd583ad12905, type: 3}
+  - {fileID: 21300000, guid: 5108e69e79310af42a479150e085c47e, type: 3}
+  - {fileID: 21300000, guid: c1feaa1770b7f8146810daa310d084bd, type: 3}
+  - {fileID: 21300000, guid: 201206116ceb90c41884961a22154605, type: 3}

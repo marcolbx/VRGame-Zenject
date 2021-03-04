@@ -8,6 +8,7 @@ public class ImageWithRoundedCorners : MonoBehaviour {
 
 	public Material material;
 	public float radius;
+	public Vector3 vector3;
 
 	void OnRectTransformDimensionsChange(){
 		Refresh();
@@ -19,6 +20,7 @@ public class ImageWithRoundedCorners : MonoBehaviour {
 
 	private void Refresh(){
 		var rect = ((RectTransform) transform).rect;
-		material.SetVector(Props, new Vector4(rect.width, rect.height, radius, 0));
+		//material.SetVector(Props, new Vector4(rect.width, rect.height, radius, 0));
+		material.SetVector(Props, new Vector4(vector3.x, vector3.y, vector3.z, 0));
 	}
 }

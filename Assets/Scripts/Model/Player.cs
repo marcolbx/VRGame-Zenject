@@ -4,6 +4,6 @@ namespace Base.Model
     {
         private const uint _maxHealth = 10;
         public uint CurrentHealth = 10;
-        public uint Speed {get; private set;} = 3;
+        public uint Experience = 0;
     }
 }

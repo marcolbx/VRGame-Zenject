@@ -28,5 +28,10 @@ namespace Base.Controller
                 _bus.Fire(new PlayerDied());
             }
         }
+
+        public void ObtainExperience()
+        {
+            Player.Experience += 1;
+        }
     }
 }

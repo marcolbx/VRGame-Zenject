@@ -18,7 +18,7 @@ namespace Base.View
         {
             _weaponController = weaponController;
             bus.Subscribe<WeaponShoot>(OnWeaponActionRefreshText);
-            bus.Subscribe<WeaponReload>(OnWeaponActionRefreshText);
+            bus.Subscribe<WeaponReloaded>(OnWeaponActionRefreshText);
             bus.Subscribe<WeaponEquipped>(OnWeaponEquipped);
 
             OnWeaponEquipped();
