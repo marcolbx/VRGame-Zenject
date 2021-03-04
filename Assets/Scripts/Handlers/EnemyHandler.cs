@@ -204,5 +204,13 @@ namespace Base.Handler
 
             _animator.SetBool(_chaseHash, _isChasing);
         }
+
+#if UNITY_EDITOR
+        public virtual void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _enemy.AudibleArea);
+        }
+#endif
     }
 }

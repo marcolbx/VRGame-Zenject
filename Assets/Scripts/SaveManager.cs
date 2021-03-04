@@ -34,4 +34,9 @@ public class SaveManager : MonoBehaviour
     private void OnApplicationQuit() {
         ES3.Save("playerxp", _player.Experience);
     }
+
+    public void SavePlayerXP()
+    {
+        ES3.Save("playerxp", _player.Experience);
+    }
 }

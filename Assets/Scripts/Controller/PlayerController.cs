@@ -32,6 +32,7 @@ namespace Base.Controller
         public void ObtainExperience()
         {
             Player.Experience += 1;
+            SaveManager.Instance.SavePlayerXP();
         }
     }
 }
