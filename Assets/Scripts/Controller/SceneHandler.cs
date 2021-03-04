@@ -2,23 +2,16 @@ using UnityEngine.SceneManagement;
 
 namespace Base.Controller
 {
-    public enum Scenes
-    {
-        Menu,
-        Tutorial,
-        StoryMode,
-        Survival
-    }
     public class SceneTransitionHandler
     {
         public void LoadMenuScene()
         {
-            LoadScene(Scenes.Menu, LoadSceneMode.Single);
+            LoadScene(0);
         }
 
-        void LoadScene(Scenes scenes, LoadSceneMode mode)
+        public void LoadScene(int index)
         {
-            SceneManager.LoadScene(scenes.ToString(), mode);
+            SceneManager.LoadScene(index);
         }
     }
 }

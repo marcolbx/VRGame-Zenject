@@ -8,4 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuScene.unity
     guid: fab27cc6a41a0834182b3be36142d12f
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/Survival.unity
+    guid: 8ad88902711e7664484c9ada045494cb
+  - enabled: 0
+    path: Assets/Samples/Google Cardboard XR Plugin for Unity/1.4.1/Hello Cardboard/Scenes/HelloCardboard.unity
+    guid: 145a2a45d7bc746b19cb68410368bf96
+  - enabled: 0
+    path: Assets/Samples/Google Cardboard XR Plugin for Unity/1.4.1/Hello Cardboard/Scenes/VrMode.unity
+    guid: 4812ec05e87b8414abcdfe0d625c0e60
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7103d20ace8e6e44d94182e0119aeea1,
+      type: 2}

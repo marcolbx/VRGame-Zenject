@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float speed = 12f;
 
+#if UNITY_EDITOR
     private void Update()
     {
         float x = Input.GetAxis("Horizontal");
@@ -14,4 +15,5 @@ public class PlayerMovement : MonoBehaviour
 
         _characterController.Move(move * speed * Time.deltaTime);
     }
+#endif
 }

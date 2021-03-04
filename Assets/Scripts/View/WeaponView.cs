@@ -8,7 +8,7 @@ namespace Base.View
 {
     public class WeaponView : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _currentAmmoText;
-        [SerializeField] private TextMeshProUGUI _currentEquippedWeapon;
+      //  [SerializeField] private TextMeshProUGUI _currentEquippedWeapon; TODO check if delete
         private Color _handgunColor => Color.red;
         private Color _shotgunColor => Color.green;
         private Color _machinegunColor => Color.blue;
@@ -33,7 +33,7 @@ namespace Base.View
 
         private void OnWeaponEquipped()
         {
-            _currentEquippedWeapon.text = _weaponController.CurrentGun.GunType.ToString();
+           // _currentEquippedWeapon.text = _weaponController.CurrentGun.GunType.ToString();
             ChangeTextColorBasedOnWeapon();
 
             OnWeaponActionRefreshText();

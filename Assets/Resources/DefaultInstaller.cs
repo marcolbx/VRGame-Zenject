@@ -17,7 +17,7 @@ public class DefaultInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<WeaponController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
-        Container.BindInterfacesAndSelfTo<SceneTransitionHandler>().AsSingle();
+        Container.BindInterfacesAndSelfTo<SceneTransitionHandler>().AsSingle().NonLazy();
     }
 
     private void BindModels()

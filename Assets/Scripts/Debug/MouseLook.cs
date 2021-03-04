@@ -6,14 +6,14 @@ public class MouseLook : MonoBehaviour
     public Transform PlayerBody;
     private float _xRotation = 0f;
     private float _yRotation = 0f;
-    // Start is called before the first frame update
-    void Start()
+
+#if UNITY_EDITOR
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
@@ -24,4 +24,5 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(_xRotation, _yRotation, 0f);
         PlayerBody.Rotate(Vector3.up * mouseX);
     }
+#endif
 }
