@@ -9,7 +9,7 @@ namespace Base.View
     public class PlayerView : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _healthText;
         private PlayerController _playerController;
-        
+
         [Inject]
         public void Init(PlayerController playerController, SignalBus bus)
         {

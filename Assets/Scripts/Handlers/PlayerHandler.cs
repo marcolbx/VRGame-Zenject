@@ -25,9 +25,6 @@ namespace Base.Handler
             if (_weaponController.IsPlayerReloading)
                 return;
 
-            Vector3 forward = transform.TransformDirection(Vector3.forward) * 10; // if debug only
-            Debug.DrawRay(transform.position, forward, Color.green); // if debug only TODO create scripting symbol
-
             if (!_weaponController.CanShoot())
             {
                 _weaponController.Reload();
@@ -39,7 +36,6 @@ namespace Base.Handler
                 RaycastHit hit;
                 if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity))  //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
                 {
-
                     EnemyHandler enemy = hit.transform.GetComponent<EnemyHandler>();
                     if (enemy != null)
                     {
@@ -49,7 +45,6 @@ namespace Base.Handler
                     }
                 }
             }
-            
         }
     }
 }
