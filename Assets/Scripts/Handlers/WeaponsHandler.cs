@@ -26,35 +26,29 @@ namespace Base.Handler
             _shootingSound.clip = _gunShots[0];
         }
 
+#if UNITY_EDITOR
         private void Update() {
             if (Input.GetKeyUp(KeyCode.Alpha1))
             {
-                if (_weapons[0].activeSelf)
-                    return;
-
-                _changingWeaponSound.Play();
                 EquipHandgun();
             }
             else if (Input.GetKeyUp(KeyCode.Alpha2))
             {
-                if (_weapons[1].activeSelf)
-                    return;
-
-                _changingWeaponSound.Play();
                 EquipShotgun();
             }
             else if (Input.GetKeyUp(KeyCode.Alpha3))
             {
-                if (_weapons[2].activeSelf)
-                    return;
-
-                _changingWeaponSound.Play();
                 EquipMachinegun();
             }
         }
-
+#endif
         public void EquipHandgun()
         {
+            if (_weapons[0].activeSelf)
+                return;
+
+            _changingWeaponSound.Play();
+
             for (int i = 0; i < _weapons.Count; i ++)
             {
                 if (i == 0)
@@ -71,6 +65,11 @@ namespace Base.Handler
         }
         public void EquipShotgun()
         {
+            if (_weapons[1].activeSelf)
+                return;
+
+            _changingWeaponSound.Play();
+
             for (int i = 0; i < _weapons.Count; i ++)
             {
                 if (i == 1)
@@ -88,6 +87,11 @@ namespace Base.Handler
 
         public void EquipMachinegun()
         {
+            if (_weapons[2].activeSelf)
+                return;
+
+            _changingWeaponSound.Play();
+
             for (int i = 0; i < _weapons.Count; i ++)
             {
                 if (i == 2)
