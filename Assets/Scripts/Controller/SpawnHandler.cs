@@ -1,15 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class SpawnHandler : MonoBehaviour
 {
     [SerializeField] private List<SpawnArea> _enemyAreas;
     [SerializeField] private List<GameObject> _enemies;
+    [SerializeField] private Transform _parentForEnemies;
     [SerializeField] private SpawnArea _ammoSpawnArea;
     [SerializeField] private List<GameObject> _ammoTypes;
 
     private uint _intervalEnemy = 350;
     private uint _intervalAmmo = 600;
+    private DiContainer Container;
+
+    [Inject]
+    public void Init(DiContainer container)
+    {
+        Container = container;
+    }
 
     private void Update()
     {
@@ -29,7 +38,10 @@ public class SpawnHandler : MonoBehaviour
         int randomSpawnAreaIndex = Random.Range(0, _enemyAreas.Count);
         int randomEnemyIndex = Random.Range(0, _enemies.Count);
 
-        Instantiate(_enemies[randomEnemyIndex], _enemyAreas[randomSpawnAreaIndex].SpawnPosition(), Quaternion.identity);
+        GameObject enemy = Container.InstantiatePrefab(_enemies[randomEnemyIndex], _parentForEnemies);
+
+        enemy.transform.SetParent(null);
+        enemy.transform.position = _enemyAreas[randomSpawnAreaIndex].SpawnPosition();
     }
 
     private void SpawnAmmo()
@@ -37,6 +49,7 @@ public class SpawnHandler : MonoBehaviour
         _intervalEnemy = (uint) Random.Range(200, 1600);
         int randomAmmoIndex = Random.Range(0, _ammoTypes.Count);
 
-        Instantiate(_ammoTypes[randomAmmoIndex], _ammoSpawnArea.SpawnPosition(), Quaternion.identity);
+        GameObject gameObject = Container.InstantiatePrefab(_ammoTypes[randomAmmoIndex]);
+        gameObject.transform.position = _ammoSpawnArea.SpawnPosition();
     }
 }

@@ -159,8 +159,8 @@ namespace Base.Handler
 
         private void AIBehaviour()
         {
-            float distance = Vector3.Distance(_playerPosition, transform.position); //Distancia entre el zombie y el jugador
-            Vector3 direction = _playerPosition - this.transform.position;  //Direccion (Vector3) del zombie al jugador
+            float distance = Vector3.Distance(_playerPosition, transform.position); //Distancia entre el enemigo y el jugador
+            Vector3 direction = _playerPosition - this.transform.position;  //Direccion (Vector3) del enemigo al jugador
             float angle = Vector3.Angle(direction, this.transform.forward); //Angulo de vision
 
             if (distance > _enemy.VisionArea && distance > _enemy.AudibleArea)
@@ -179,13 +179,11 @@ namespace Base.Handler
 
             if (distance < _enemy.VisionArea && angle < _enemy.AngleRadius)
             {
-                Debug.Log("Vision");
                 _isChasing = true;
             }
 
             if (_enemy.AttackDistance > distance)
             {
-                Debug.Log("AttackDistance");
                 _isChasing = false;
                _animator.SetTrigger(_atkDistanceHash);
             }
@@ -196,7 +194,6 @@ namespace Base.Handler
 
             if (_enemy.AudibleArea > distance && distance > _enemy.AttackDistance)
             {
-                Debug.Log("AudibleArea");
                 _isChasing = true;
                 _agent.isStopped = false;
                 _agent.SetDestination(_playerPosition);

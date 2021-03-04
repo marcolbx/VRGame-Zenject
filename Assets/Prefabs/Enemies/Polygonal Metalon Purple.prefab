@@ -701,7 +701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ColorType: 3
   CurrentHealth: 7
-  AudibleArea: 200
+  AudibleArea: 350
 --- !u!114 &2820146589282425237
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,16 +18,22 @@ namespace Base.Controller
         public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, Machinegun machinegun, SignalBus bus)
         {
             _bus = bus;
-            Inventory = inventory;
             _handgun = handgun;
             _shotgun = shotgun;
             _machinegun = machinegun;
 
+            Inventory = inventory;
+            CurrentGun = _handgun;
+
+            InitialAmmo();
+        }
+
+        private void InitialAmmo() //TODO if new game mode, change
+        {
             _handgun.CurrentAmmo = _handgun.MaxAmmo;
             _shotgun.CurrentAmmo = _shotgun.MaxAmmo;
-            Inventory.HandgunAmmo = 12; //TODO change;
-
-            CurrentGun = _handgun;
+            _machinegun.CurrentAmmo = _machinegun.MaxAmmo;
+            Inventory.HandgunAmmo = 12;
         }
 
         public bool CanShoot()
