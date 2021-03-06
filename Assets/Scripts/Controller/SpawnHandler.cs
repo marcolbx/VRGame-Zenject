@@ -10,8 +10,8 @@ public class SpawnHandler : MonoBehaviour
     [SerializeField] private SpawnArea _ammoSpawnArea;
     [SerializeField] private List<GameObject> _ammoTypes;
 
-    private uint _intervalEnemy = 350;
-    private uint _intervalAmmo = 600;
+    private uint _intervalEnemy = 400;
+    private uint _intervalAmmo = 100;
     private DiContainer Container;
 
     [Inject]
@@ -34,7 +34,7 @@ public class SpawnHandler : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        _intervalEnemy = (uint) Random.Range(100, 800);
+        _intervalEnemy = (uint) Random.Range(300, 900);
         int randomSpawnAreaIndex = Random.Range(0, _enemyAreas.Count);
         int randomEnemyIndex = Random.Range(0, _enemies.Count);
 
@@ -46,7 +46,7 @@ public class SpawnHandler : MonoBehaviour
 
     private void SpawnAmmo()
     {
-        _intervalEnemy = (uint) Random.Range(200, 1600);
+        _intervalAmmo = (uint) Random.Range(400, 1000);
         int randomAmmoIndex = Random.Range(0, _ammoTypes.Count);
 
         GameObject gameObject = Container.InstantiatePrefab(_ammoTypes[randomAmmoIndex]);

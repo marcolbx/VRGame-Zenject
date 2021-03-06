@@ -74,3 +74,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rankList: {fileID: 11400000, guid: b21ade5649c93f345b729c283abb10b2, type: 2}
+  _weaponAttachments: {fileID: 11400000, guid: afcd8e7e7f181a34593bf39369c5826c, type: 2}

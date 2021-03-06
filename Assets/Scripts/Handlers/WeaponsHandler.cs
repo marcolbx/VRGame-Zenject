@@ -16,6 +16,7 @@ namespace Base.Handler
         [SerializeField] private AudioSource _changingWeaponSound;
         [SerializeField] private AudioSource _shootingSound;
         [SerializeField] private AudioSource _reloadSound;
+        [SerializeField] private AudioSource _obtainedAmmoSound;
         private WeaponController _weaponController;
 
         [Inject]
@@ -23,14 +24,17 @@ namespace Base.Handler
         {
             _weaponController = weaponController;
             bus.Subscribe<WeaponReloadStart>(OnReloadStart);
+            bus.Subscribe<WeaponAmmoGained>(PlayObtainedAmmoSound);
         }
 
-        private void Start() {
+        private void Start() 
+        {
             _shootingSound.clip = _gunShots[0];
         }
 
 #if UNITY_EDITOR
-        private void Update() {
+        private void Update() 
+        {
             if (Input.GetKeyUp(KeyCode.Alpha1))
             {
                 EquipHandgun();
@@ -118,6 +122,11 @@ namespace Base.Handler
         public void OnReloadStart()
         {
             _reloadSound.Play();
+        }
+
+        private void PlayObtainedAmmoSound()
+        {
+            _obtainedAmmoSound.Play();
         }
     }
 }

@@ -45,5 +45,10 @@ namespace Base.Controller
         {
             return _rankList.RankIcon[GetPlayerRank()];
         }
+
+        public string ObtainCurrentRankTitle()
+        {
+            return _rankList.Rank[GetPlayerRank()];
+        }
     }
 }

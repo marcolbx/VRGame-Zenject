@@ -19,4 +19,8 @@ namespace Base.Signal
     public struct WeaponAmmoGained
     {
     }
+
+    public struct AttachmentBought
+    {
+    }
 }

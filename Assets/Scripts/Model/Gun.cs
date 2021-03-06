@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Base.Model
 {
     public enum GunType
@@ -15,6 +17,7 @@ namespace Base.Model
         bool IsMagazineEmpty { get; }
         bool IsMagazineFull { get; }
         float Damage { get; set; }
+        bool HasAttachment { get; }
 
         void Shoot();
     }
@@ -27,6 +30,8 @@ namespace Base.Model
         public bool IsMagazineEmpty => CurrentAmmo == 0;
         public bool IsMagazineFull => CurrentAmmo == MaxAmmo;
         public virtual float Damage { get; set; } = 1;
+        public virtual bool HasAttachment => Attachments?.Count > 0;
+        public List<Attachment> Attachments { get; private set; } = new List<Attachment>();
 
         public virtual void Shoot()
         {

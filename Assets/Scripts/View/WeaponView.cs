@@ -25,6 +25,11 @@ namespace Base.View
             OnWeaponActionRefreshText();
         }
 
+        private void Start() 
+        {
+            _currentAmmoText.color = _handgunColor;
+        }
+
         private void OnWeaponEquipped()
         {
             ChangeTextColorBasedOnWeapon();

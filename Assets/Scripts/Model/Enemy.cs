@@ -19,5 +19,6 @@ namespace Base.Model
         public float AudibleArea = 17f;
         public float AttackDistance { get; private set; } = 5f;
         public float AngleRadius { get; private set; } = 30f;
+        public float MoneyToGive = 3;
     }
 }

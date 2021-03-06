@@ -31,10 +31,10 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Zenject
-    - Zenject-IntegrationTests
-    - Google.XR.Cardboard
-    - Nobi.UiRoundedCorners
     - Assembly-CSharp-firstpass
+    - Zenject-IntegrationTests
+    - Nobi.UiRoundedCorners
+    - Google.XR.Cardboard
     - Zenject-TestFramework
     - Google.XR.Cardboard.Editor
     showAdvancedSettings: 0

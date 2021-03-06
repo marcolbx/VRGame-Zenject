@@ -12,6 +12,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9174ed92127acde4f9d0e2d89d4583bb, type: 2}
+    - target: {fileID: 2820146589282425238, guid: daeb090a184313b40ae062584221b2fb,
+        type: 3}
+      propertyPath: ColorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146589282425238, guid: daeb090a184313b40ae062584221b2fb,
+        type: 3}
+      propertyPath: MoneyToGive
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2820795181310986374, guid: daeb090a184313b40ae062584221b2fb,
         type: 3}
       propertyPath: m_Name

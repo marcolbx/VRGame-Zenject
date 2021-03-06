@@ -10,30 +10,35 @@ namespace Base.Controller
         private SignalBus _bus;
         public WeaponInventory Inventory { get; private set; }
         public IGun CurrentGun { get; private set; }
-        private Handgun _handgun;
-        private Shotgun _shotgun;
-        private Machinegun _machinegun;
+        public Handgun Handgun { get; private set; }
+        public Shotgun Shotgun { get; private set; }
+        public Machinegun Machinegun { get; private set; }
+        private PlayerStatsController _playerStatsController;
         public bool IsPlayerReloading {get; private set;}
 
-        public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, Machinegun machinegun, SignalBus bus)
+        public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, Machinegun machinegun, SignalBus bus, PlayerStatsController playerStatsController)
         {
             _bus = bus;
-            _handgun = handgun;
-            _shotgun = shotgun;
-            _machinegun = machinegun;
+            Handgun = handgun;
+            Shotgun = shotgun;
+            Machinegun = machinegun;
 
             Inventory = inventory;
-            CurrentGun = _handgun;
+            CurrentGun = Handgun;
+
+            _playerStatsController = playerStatsController;
 
             InitialAmmo();
         }
 
-        private void InitialAmmo() //TODO if new game mode, change
+        public void InitialAmmo() //TODO if new game mode, change
         {
-            _handgun.CurrentAmmo = _handgun.MaxAmmo;
-            _shotgun.CurrentAmmo = _shotgun.MaxAmmo;
-            _machinegun.CurrentAmmo = _machinegun.MaxAmmo;
-            Inventory.HandgunAmmo = 12;
+            Handgun.CurrentAmmo = Handgun.MaxAmmo;
+            Shotgun.CurrentAmmo = Shotgun.MaxAmmo;
+            Machinegun.CurrentAmmo = Machinegun.MaxAmmo;
+            Inventory.HandgunAmmo = 50;
+            Inventory.ShotgunAmmo = 30;
+            Inventory.MachinegunAmmo = 100;
         }
 
         public bool CanShoot()
@@ -47,6 +52,8 @@ namespace Base.Controller
                 return;
 
              CurrentGun.Shoot();
+             _playerStatsController.AddBulletShot();
+
             _bus.Fire(new WeaponShoot());
         }
 
@@ -168,16 +175,16 @@ namespace Base.Controller
 
         public void ChangeToHandgun()
         {
-            ChangeWeapon(_handgun);
+            ChangeWeapon(Handgun);
         }
         public void ChangeToShotgun()
         {
-            ChangeWeapon(_shotgun);
+            ChangeWeapon(Shotgun);
         }
 
         public void ChangeToMachinegun()
         {
-            ChangeWeapon(_machinegun);
+            ChangeWeapon(Machinegun);
         }
     }
 }

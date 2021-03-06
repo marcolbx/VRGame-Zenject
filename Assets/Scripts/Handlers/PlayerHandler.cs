@@ -1,4 +1,5 @@
 using Base.Controller;
+using Base.Signal;
 using UnityEngine;
 using Zenject;
 
@@ -7,21 +8,31 @@ namespace Base.Handler
     public class PlayerHandler : MonoBehaviour
     {
         [SerializeField] private WeaponsHandler _weaponsHandler;
+        [SerializeField] private ParticleSystem[] _muzzleFlash;
+        [SerializeField] private AudioSource _hurtSound;
+        [SerializeField] private GameObject _redHurtLight;
         private WeaponController _weaponController;
         private Camera _camera;
-        private int _layerMask;
+        private int _layerMask = 1 << 10;
+
+        // This would cast rays only against colliders in layer 10.
+        // But instead we want to collide against everything except layer 10. The ~ operator does this, it inverts a bitmask.
 
         [Inject]
-        public void Init(WeaponController weaponController)
+        public void Init(WeaponController weaponController, SignalBus bus)
         {
             _weaponController = weaponController;
+            bus.Subscribe<PlayerDamaged>(PlayHurtSound);
         }
 
-        private void Start() {
+        private void Start() 
+        {
             _camera = Camera.main;
+            _layerMask = ~_layerMask;
         }
 
-        private void Update() {
+        private void Update() 
+        {
             if (_weaponController.IsPlayerReloading)
                 return;
 
@@ -34,17 +45,39 @@ namespace Base.Handler
             if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetButtonDown("Fire1"))
             {
                 RaycastHit hit;
-                if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity))  //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+                if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _layerMask))  //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
                 {
                     EnemyHandler enemy = hit.transform.GetComponent<EnemyHandler>();
                     if (enemy != null)
                     {
                         _weaponsHandler.PlayGunShot();
+                        ActivateMuzzleFlash();
                         _weaponController.Shoot();
                         enemy.TakeDamage();
                     }
                 }
             }
+        }
+
+        private void ActivateMuzzleFlash()
+        {
+            foreach (var particleSystem in _muzzleFlash)
+            {
+                particleSystem.Play();
+            }
+        }
+
+        private void PlayHurtSound()
+        {
+            _hurtSound.Play();
+            _redHurtLight.SetActive(true);
+
+            Invoke("DeactivateRedHurtLight", 1f);
+        }
+
+        private void DeactivateRedHurtLight()
+        {
+            _redHurtLight.SetActive(false);
         }
     }
 }

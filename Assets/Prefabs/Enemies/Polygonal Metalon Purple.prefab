@@ -702,6 +702,7 @@ MonoBehaviour:
   ColorType: 3
   CurrentHealth: 7
   AudibleArea: 350
+  MoneyToGive: 2
 --- !u!114 &2820146589282425237
 MonoBehaviour:
   m_ObjectHideFlags: 0

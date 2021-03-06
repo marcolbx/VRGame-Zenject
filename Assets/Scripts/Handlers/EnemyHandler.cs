@@ -24,6 +24,7 @@ namespace Base.Handler
         #region Zenject
         private WeaponController _weaponController;
         private PlayerController _playerController;
+        private PlayerStatsController _playerStatsController;
         #endregion
 
         #region Animator Hashes
@@ -35,17 +36,20 @@ namespace Base.Handler
         #endregion
 
         [Inject]
-        public void Init(WeaponController weaponController, PlayerController playerController)
+        public void Init(WeaponController weaponController, PlayerController playerController, PlayerStatsController playerStatsController)
         {
             _weaponController = weaponController;
             _playerController = playerController;
+            _playerStatsController = playerStatsController;
         }
 
-        private void Start() {
+        private void Start() 
+        {
             _agent.stoppingDistance = _enemy.AttackDistance - 1;
         }
 
-        private void Update() {
+        private void Update() 
+        {
             if (!_isAlive || _isHurt || _isDefending)
                 return;
             
@@ -63,6 +67,10 @@ namespace Base.Handler
                 return true;
             }
             else if (_weaponController.CurrentGun.GunType == GunType.Machinegun && _enemy.ColorType == EnemyType.Blue)
+            {
+                return true;
+            }
+            else if(_enemy.ColorType == EnemyType.Purple)
             {
                 return true;
             }
@@ -90,6 +98,8 @@ namespace Base.Handler
                 {
                     _animator.SetTrigger(_defendHash);
                     _isDefending = true;
+
+                    _playerStatsController.AddCritical();
                 }
                 else
                     _animator.SetTrigger(_hurtHash);
@@ -153,7 +163,11 @@ namespace Base.Handler
             _animator.ResetTrigger(_defendHash);
 
             _animator.SetTrigger(_dieHash);
+
+            _playerStatsController.AddKillSurvivalRound(); // TODO Change this to an enum of game modes
+            _playerController.ObtainMoney(_enemy.MoneyToGive);
             _playerController.ObtainExperience();
+
             Destroy(gameObject, 5f);
         }
 

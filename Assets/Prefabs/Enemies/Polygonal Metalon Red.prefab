@@ -12,10 +12,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bcaad48fae9d78948944fe183b6e39fe, type: 2}
+    - target: {fileID: 2820146589282425238, guid: daeb090a184313b40ae062584221b2fb,
+        type: 3}
+      propertyPath: ColorType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820146589282425238, guid: daeb090a184313b40ae062584221b2fb,
+        type: 3}
+      propertyPath: MoneyToGive
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2820795181310986374, guid: daeb090a184313b40ae062584221b2fb,
         type: 3}
       propertyPath: m_Name
-      value: Polygonal Metalon Red 1
+      value: Polygonal Metalon Red
       objectReference: {fileID: 0}
     - target: {fileID: 2823148238498874956, guid: daeb090a184313b40ae062584221b2fb,
         type: 3}
