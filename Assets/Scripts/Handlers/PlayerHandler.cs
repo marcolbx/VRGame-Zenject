@@ -38,6 +38,9 @@ namespace Base.Handler
             if (_weaponController.IsPlayerReloading)
                 return;
 
+            if (!_weaponController.HasAmmo)
+                return;
+
             if (!_weaponController.CanShoot())
             {
                 _weaponController.Reload();

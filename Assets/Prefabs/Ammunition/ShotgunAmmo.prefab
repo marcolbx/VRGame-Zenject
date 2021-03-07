@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3564715785886078258}
   - component: {fileID: 3564715785886078415}
   - component: {fileID: 3564715785886078414}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShotgunAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,12 +73,24 @@ PrefabInstance:
       value: Hint_Ammo
       objectReference: {fileID: 0}
     - target: {fileID: 1578636705103630, guid: 13578a4737b45f14eb3d359018cf3fbc, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578636705103630, guid: 13578a4737b45f14eb3d359018cf3fbc, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1639540860061626, guid: 13578a4737b45f14eb3d359018cf3fbc, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1639540860061626, guid: 13578a4737b45f14eb3d359018cf3fbc, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967294
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863321453647734, guid: 13578a4737b45f14eb3d359018cf3fbc, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1863321453647734, guid: 13578a4737b45f14eb3d359018cf3fbc, type: 3}
       propertyPath: m_StaticEditorFlags
