@@ -93,16 +93,19 @@ public class SaveManager : MonoBehaviour
     public void SaveHandgunRedDotPurchase(string nameOfItem)
     {
         ES3.Save("handgunRedDot", nameOfItem);
+        ES3.Save("money", _player.Money);
     }
 
     public void SaveShotgunScopePurchase(string nameOfItem)
     {
         ES3.Save("shotgunScope", nameOfItem);
+        ES3.Save("money", _player.Money);
     }
 
     public void SaveMachinegunScopePurchase(string nameOfItem)
     {
         ES3.Save("machinegunScope", nameOfItem);
+        ES3.Save("money", _player.Money);
     }
 
     public void LoadPurchases()
