@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MachinegunScope
   m_EditorClassIdentifier: 
   Name: ELCAN
-  Cost: 1000
+  Cost: 1500
   Gun: 2
   Trait: 0

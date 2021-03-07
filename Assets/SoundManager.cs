@@ -13,11 +13,6 @@ public class SoundManager : MonoBehaviour
         bus.Subscribe<AttachmentBought>(OnAttachmentBought);
     }
 
-    private void Start() 
-    {
-        _music.Play();
-    }
-
     private void OnAttachmentBought()
     {
         _itemBoughtSound.Play();
