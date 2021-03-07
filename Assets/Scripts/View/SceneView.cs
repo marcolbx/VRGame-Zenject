@@ -1,4 +1,5 @@
 using Base.Handler;
+using Base.Controller;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -19,14 +20,30 @@ namespace Base.View
         [SerializeField] private Animator _fadeAnimator;
         [SerializeField] private VRInteraction _interactionType;
         private SceneHandler _sceneHandler;
+        private ControlsController _controlsController;
 
         [Inject]
-        public void Init(SceneHandler sceneHandler)
+        public void Init(SceneHandler sceneHandler, ControlsController controlsController)
         {
             _sceneHandler = sceneHandler;
+            _controlsController = controlsController;
         }
 
         public void OnPointerClick()
+        {
+            if (_controlsController.CurrentControl == 0)
+                return;
+            HandleInteractions();
+        }
+
+        public void OnPointerEnter()
+        {
+            if (_controlsController.CurrentControl == 1)
+                return;
+            HandleInteractions();
+        }
+
+        private void HandleInteractions()
         {
             if (_playSound != null)
                 _playSound.Play();

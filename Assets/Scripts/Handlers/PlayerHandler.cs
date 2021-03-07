@@ -12,6 +12,7 @@ namespace Base.Handler
         [SerializeField] private AudioSource _hurtSound;
         [SerializeField] private GameObject _redHurtLight;
         private WeaponController _weaponController;
+        private ControlsController _controlsController;
         private Camera _camera;
         private int _layerMask = 1 << 10;
 
@@ -19,9 +20,10 @@ namespace Base.Handler
         // But instead we want to collide against everything except layer 10. The ~ operator does this, it inverts a bitmask.
 
         [Inject]
-        public void Init(WeaponController weaponController, SignalBus bus)
+        public void Init(WeaponController weaponController, SignalBus bus, ControlsController controlsController)
         {
             _weaponController = weaponController;
+            _controlsController = controlsController;
             bus.Subscribe<PlayerDamaged>(PlayHurtSound);
         }
 
@@ -42,7 +44,7 @@ namespace Base.Handler
                 return;
             }
 
-            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetButtonDown("Fire1"))
+            if (_controlsController.InputCondition() || Input.GetButtonDown("Fire1"))
             {
                 RaycastHit hit;
                 if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _layerMask))  //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))

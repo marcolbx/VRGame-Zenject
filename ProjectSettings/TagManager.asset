@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - Object
   - Bounds
+  - Control
+  - VirtualButton
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - Weapon
   - Player
   - Bounds
-  - 
-  - 
+  - Controls
+  - VirtualButton
   - 
   - 
   - 

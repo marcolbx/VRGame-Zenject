@@ -18,6 +18,7 @@ namespace Base.Model
         bool IsMagazineFull { get; }
         float Damage { get; set; }
         bool HasAttachment { get; }
+        List<Attachment> Attachments { get; }
 
         void Shoot();
     }

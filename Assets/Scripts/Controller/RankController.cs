@@ -23,19 +23,19 @@ namespace Base.Controller
         {
             if (_player.Experience < 20)
                 return 0;
-            else if (_player.Experience < 40)
+            else if (_player.Experience < 75)
                 return 1;
-            else if (_player.Experience < 70)
-                return 2;
-            else if (_player.Experience < 100)
-                return 3;
             else if (_player.Experience < 150)
+                return 2;
+            else if (_player.Experience < 300)
+                return 3;
+            else if (_player.Experience < 600)
                 return 4;
-            else if (_player.Experience < 250)
-                return 5;
-            else if (_player.Experience < 500)
-                return 6;
             else if (_player.Experience < 1000)
+                return 5;
+            else if (_player.Experience < 1500)
+                return 6;
+            else if (_player.Experience < 2000)
                 return 7;
             else
                 return 8;

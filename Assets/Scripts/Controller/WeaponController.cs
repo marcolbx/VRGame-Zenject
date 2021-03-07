@@ -14,7 +14,9 @@ namespace Base.Controller
         public Shotgun Shotgun { get; private set; }
         public Machinegun Machinegun { get; private set; }
         private PlayerStatsController _playerStatsController;
-        public bool IsPlayerReloading {get; private set;}
+        public bool HasAmmo => !CurrentGun.IsMagazineEmpty;
+        public bool IsPlayerReloading { get; private set; }
+        public bool IsShootable { get; private set; } = true;
 
         public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, Machinegun machinegun, SignalBus bus, PlayerStatsController playerStatsController)
         {
@@ -43,7 +45,7 @@ namespace Base.Controller
 
         public bool CanShoot()
         {
-            return !CurrentGun.IsMagazineEmpty;
+            return IsShootable;
         }
 
         public void Shoot()
@@ -52,8 +54,11 @@ namespace Base.Controller
                 return;
 
              CurrentGun.Shoot();
-             _playerStatsController.AddBulletShot();
+             IsShootable = false;
 
+             DoFireRate();
+
+             _playerStatsController.AddBulletShot();
             _bus.Fire(new WeaponShoot());
         }
 
@@ -119,6 +124,12 @@ namespace Base.Controller
             await Task.Delay(1000); // TODO reload based on gun time
             IsPlayerReloading = false;
             _bus.Fire(new WeaponReloaded());
+        }
+
+        private async void DoFireRate()
+        {
+            await Task.Delay(300);
+            IsShootable = true;
         }
 
         private void ReloadHandgun()

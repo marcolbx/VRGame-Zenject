@@ -23,6 +23,7 @@ public class DefaultInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<WeaponController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<StoreController>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ControlsController>().AsSingle();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
         Container.BindInterfacesAndSelfTo<RankController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<SceneHandler>().AsSingle().NonLazy();
@@ -54,5 +55,6 @@ public class DefaultInstaller : MonoInstaller
         Container.DeclareSignal<WeaponAmmoGained>();
         Container.DeclareSignal<AttachmentBought>();
         Container.DeclareSignal<PlayerDamaged>();
+        Container.DeclareSignal<DataLoaded>();
     }
 }

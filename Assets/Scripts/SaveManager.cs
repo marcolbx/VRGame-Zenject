@@ -1,4 +1,6 @@
 using Base.Model;
+using Base.Controller;
+using Base.Signal;
 using UnityEngine;
 using Zenject;
 
@@ -11,15 +13,19 @@ public class SaveManager : MonoBehaviour
     private Handgun _handgun;
     private Shotgun _shotgun;
     private Machinegun _machinegun;
+    private ControlsController _controls;
+    private SignalBus _bus;
 
     [Inject]
-    public void Init(Player player, PlayerStats playerStats, Handgun handgun, Shotgun shotgun, Machinegun machinegun)
+    public void Init(Player player, PlayerStats playerStats, Handgun handgun, Shotgun shotgun, Machinegun machinegun, ControlsController controls, SignalBus bus)
     {
         _player = player;
         _playerStats = playerStats;
         _handgun = handgun;
         _shotgun = shotgun;
         _machinegun = machinegun;
+        _controls = controls;
+        _bus = bus;
     }
 
     private void Awake()
@@ -56,6 +62,10 @@ public class SaveManager : MonoBehaviour
         if(ES3.KeyExists("money"))
             _player.Money = ES3.Load<float>("money");
 
+        if(ES3.KeyExists("control"))
+            _controls.CurrentControl = ES3.Load<uint>("control");
+
+        _bus.Fire(new DataLoaded());
         LoadPurchases();
     }
 
@@ -72,8 +82,12 @@ public class SaveManager : MonoBehaviour
         ES3.Save("critical", _playerStats.TotalCriticals);
         ES3.Save("criticalRate", _playerStats.CriticalShotRate);
         ES3.Save("money", _player.Money);
-        Debug.Log("Saving players money with: " + _player.Money);
         ES3.Save("highestKillCount", _playerStats.SurvivalHighestKillCount);
+    }
+
+    public void SaveControls()
+    {
+        ES3.Save("control", _controls.CurrentControl);
     }
 
     public void SaveHandgunRedDotPurchase(string nameOfItem)
@@ -99,10 +113,5 @@ public class SaveManager : MonoBehaviour
             _shotgun.Attachments.Add(new Attachment(){Name = ES3.Load<string>("shotgunScope")});
         if(ES3.KeyExists("machinegunScope"))
             _machinegun.Attachments.Add(new Attachment(){Name = ES3.Load<string>("machinegunScope")});
-
-        Debug.Log("Handgun Attachments: " + _handgun?.Attachments?.Count);
-        Debug.Log("Shotgun Attachments: " + _shotgun?.Attachments?.Count);
-        Debug.Log("Machine Attachments: " + _machinegun?.Attachments?.Count);
-
     }
 }

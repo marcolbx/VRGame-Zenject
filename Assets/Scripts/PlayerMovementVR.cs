@@ -1,17 +1,27 @@
 using UnityEngine;
+using Zenject;
+using Base.Controller;
 
 public class PlayerMovementVR : MonoBehaviour
 {
     [SerializeField] private PlayerMotor _playerMotor;
     [SerializeField] private Transform _camera;
     [SerializeField] private float _speed = 3f;
-    private float _movebool = 0;
+    private float _movebool = 1;
     private bool _mobileInput => Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
+    private bool _mobileWithoutHeadset => true;
     private bool _editorInput => Input.GetButtonDown("Fire1");
+    private ControlsController _controlsController;
+
+    [Inject]
+    public void Init(ControlsController controlsController)
+    {
+        _controlsController = controlsController;
+    }
 
     private void Update()
     {
-        if (InputCondition())
+        if (_controlsController.InputCondition())
         {
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hit;

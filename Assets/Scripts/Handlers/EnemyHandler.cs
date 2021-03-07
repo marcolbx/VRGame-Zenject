@@ -115,6 +115,7 @@ namespace Base.Handler
         private float CalculateDamageToReceive()
         {
             float damage;
+
             if (IsCriticalHit())
             {
                 damage = _weaponController.CurrentGun.Damage * 2;
@@ -124,7 +125,10 @@ namespace Base.Handler
                 damage = _weaponController.CurrentGun.Damage;
             }
 
-            if(_isDefending)
+            if (_weaponController.CurrentGun.HasAttachment)
+                damage += 0.5f;
+
+            if (_isDefending)
                 damage = damage / 2;
 
             return damage;
