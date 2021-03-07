@@ -8,10 +8,8 @@ public class PlayerMovementVR : MonoBehaviour
     [SerializeField] private Transform _camera;
     [SerializeField] private float _speed = 3f;
     private float _movebool = 1;
-    private bool _mobileInput => Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
-    private bool _mobileWithoutHeadset => true;
-    private bool _editorInput => Input.GetButtonDown("Fire1");
     private ControlsController _controlsController;
+    private Vector3 _currentDirection;
 
     [Inject]
     public void Init(ControlsController controlsController)
@@ -24,6 +22,7 @@ public class PlayerMovementVR : MonoBehaviour
         if (_controlsController.InputCondition())
         {
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            _currentDirection = Camera.main.transform.forward;
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 3000))
@@ -40,24 +39,14 @@ public class PlayerMovementVR : MonoBehaviour
                         _movebool = 0;
                 }
             }
+            ApplyMovement();
         }
 
-        ApplyMovement();
-    }
-
-    private bool InputCondition()
-    {
-#if UNITY_EDITOR
-            return  _editorInput;
-#else
-            return _mobileInput;
-#endif
     }
 
     private void ApplyMovement()
     {
-        Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
-        Vector3 _velocity2 = forward * _speed * _movebool;
+        Vector3 _velocity2 = _currentDirection * _speed * _movebool;
 
         _playerMotor.Move(_velocity2);
 

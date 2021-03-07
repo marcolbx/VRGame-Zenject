@@ -8,7 +8,7 @@ namespace Base.Controller
 {
     public class ControlsController
     {
-        public bool MobileInput => Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
+        public bool MobileInput => Input.touchCount > 0;
         public bool MobileWithoutButton => true;
         private bool _editorInput => Input.GetButtonDown("Fire1");
         public uint CurrentControl { get; set; }
