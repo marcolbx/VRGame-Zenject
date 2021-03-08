@@ -147,7 +147,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.VRZenject
+    Android: com.MLBGames.FPSINVASIONVRLite
     Standalone: com.DefaultCompany.VRZenject
   buildNumber:
     Standalone: 0

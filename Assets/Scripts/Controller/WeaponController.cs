@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Base.Model;
 using Base.Signal;
+using UnityEngine;
 using Zenject;
 
 namespace Base.Controller
@@ -15,8 +16,8 @@ namespace Base.Controller
         public Machinegun Machinegun { get; private set; }
         private PlayerStatsController _playerStatsController;
         public bool HasAmmo => !CurrentGun.IsMagazineEmpty;
-        public bool IsPlayerReloading { get; private set; }
-        public bool IsShootable { get; private set; } = true;
+        public bool IsPlayerReloading { get; private set; } = false;
+        public bool CanShoot { get; private set; } = true;
 
         public WeaponController(WeaponInventory inventory, Handgun handgun, Shotgun shotgun, Machinegun machinegun, SignalBus bus, PlayerStatsController playerStatsController)
         {
@@ -43,18 +44,13 @@ namespace Base.Controller
             Inventory.MachinegunAmmo = 100;
         }
 
-        public bool CanShoot()
-        {
-            return IsShootable;
-        }
-
         public void Shoot()
         {
-            if (!CanShoot())
+            if (!CanShoot)
                 return;
 
              CurrentGun.Shoot();
-             IsShootable = false;
+             CanShoot = false;
 
              DoFireRate();
 
@@ -80,6 +76,9 @@ namespace Base.Controller
 
         private bool CanReload()
         {
+            Debug.Log(" IsMagazineEmpty: " + CurrentGun.IsMagazineEmpty);
+            Debug.Log(" CurrentAmmo: " + CurrentGun.CurrentAmmo);
+            Debug.Log("HandgunAmmo Inventory: " + Inventory.HandgunAmmo);
             if (!CurrentGun.IsMagazineEmpty)
                 return false;
 
@@ -99,6 +98,7 @@ namespace Base.Controller
 
         public void Reload()
         {
+            Debug.Log("CanReload bool: " + CanReload());
             if (!CanReload())
                 return;
 
@@ -130,7 +130,7 @@ namespace Base.Controller
         private async void DoFireRate()
         {
             await Task.Delay(300);
-            IsShootable = true;
+            CanShoot = true;
         }
 
         private void ReloadHandgun()
