@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Base.Model;
 using Base.Signal;
-using UnityEngine;
 using Zenject;
 
 namespace Base.Controller
@@ -76,9 +75,6 @@ namespace Base.Controller
 
         private bool CanReload()
         {
-            Debug.Log(" IsMagazineEmpty: " + CurrentGun.IsMagazineEmpty);
-            Debug.Log(" CurrentAmmo: " + CurrentGun.CurrentAmmo);
-            Debug.Log("HandgunAmmo Inventory: " + Inventory.HandgunAmmo);
             if (!CurrentGun.IsMagazineEmpty)
                 return false;
 
@@ -98,7 +94,6 @@ namespace Base.Controller
 
         public void Reload()
         {
-            Debug.Log("CanReload bool: " + CanReload());
             if (!CanReload())
                 return;
 

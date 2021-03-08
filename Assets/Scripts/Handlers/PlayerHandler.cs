@@ -40,15 +40,11 @@ namespace Base.Handler
 
             if (!_weaponController.CanShoot)
             {
-                Debug.Log("Inside !CanShoot");
                 _weaponController.Reload();
                 return;
             }
 
-            if (!_weaponController.HasAmmo)
-                return;
-
-            if (_controlsController.InputCondition() || Input.GetButtonDown("Fire1"))
+            if ((_controlsController.InputCondition() || Input.GetButtonDown("Fire1")) && _weaponController.HasAmmo)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity, _layerMask))  //if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
