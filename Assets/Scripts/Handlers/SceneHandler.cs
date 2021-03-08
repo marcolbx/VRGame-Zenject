@@ -28,10 +28,22 @@ namespace Base.Handler
         {
             _playerController.ResetHealth();
             _playerStatsController.ResetEphemeral();
-            _weaponController.InitialAmmo();
+            _weaponController.InitialAmmoSurvivalMode();
 
             await Task.Delay(4000);
             SceneManager.LoadScene(1);
+        }
+
+        public async void LoadStore()
+        {
+            await Task.Delay(4000);
+            SceneManager.LoadScene("StoreScene");
+        }
+
+        public async void LoadStats()
+        {
+            await Task.Delay(4000);
+            SceneManager.LoadScene("StatsScene");
         }
 
         public void LoadGameOver()

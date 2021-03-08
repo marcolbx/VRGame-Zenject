@@ -30,10 +30,10 @@ namespace Base.Controller
 
             _playerStatsController = playerStatsController;
 
-            InitialAmmo();
+            InitialAmmoSurvivalMode();
         }
 
-        public void InitialAmmo() //TODO if new game mode, change
+        public void InitialAmmoSurvivalMode() //TODO if new game mode, change
         {
             Handgun.CurrentAmmo = Handgun.MaxAmmo;
             Shotgun.CurrentAmmo = Shotgun.MaxAmmo;
@@ -114,6 +114,7 @@ namespace Base.Controller
             {
                 ReloadMachinegun();
             }
+
             IsPlayerReloading = true;
             _bus.Fire(new WeaponReloadStart());
             DoReload();

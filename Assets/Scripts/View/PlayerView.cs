@@ -21,7 +21,6 @@ namespace Base.View
             _playerController = playerController;
             bus.Subscribe<PlayerDamaged>(OnDamageRefreshText);
             bus.Subscribe<AttachmentBought>(OnItemBought);
-
         }
 
         private void Start() 

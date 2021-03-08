@@ -17,7 +17,8 @@ public class PlayerRankView : MonoBehaviour
         _rankController = rankController;
     }
 
-    private void Start() {
+    private void Start() 
+    {
         ShowStats();
     }
 

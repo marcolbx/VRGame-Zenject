@@ -1,7 +1,3 @@
-using Base.Handler;
-using Base.Model;
-using Base.Signal;
-using Zenject;
 using UnityEngine;
 
 namespace Base.Controller
@@ -11,12 +7,7 @@ namespace Base.Controller
         public bool MobileInput => Input.touchCount > 0;
         public bool MobileWithoutButton => true;
         private bool _editorInput => Input.GetButtonDown("Fire1");
-        public uint CurrentControl { get; set; }
-
-        public ControlsController()
-        {
-            CurrentControl = 0;
-        }
+        public uint CurrentControl { get; set; } = 0;
 
         public bool InputCondition()
         {

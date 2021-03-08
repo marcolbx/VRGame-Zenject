@@ -56,5 +56,6 @@ public class DefaultInstaller : MonoInstaller
         Container.DeclareSignal<AttachmentBought>();
         Container.DeclareSignal<PlayerDamaged>();
         Container.DeclareSignal<DataLoaded>();
+        Container.DeclareSignal<ControlSelected>();
     }
 }

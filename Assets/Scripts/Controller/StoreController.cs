@@ -23,34 +23,34 @@ public class StoreController
 
     public void BuyHandgunsRedDotSight()
     {
-        if (_player.Money >= _weaponAttachments.attachments[0].Cost)
+        if (_player.Money >= _weaponAttachments.Attachments[0].Cost)
         {
-            _player.Money -= _weaponAttachments.attachments[0].Cost;
-            _weaponController.Handgun.Attachments.Add(new Attachment() { Name = _weaponAttachments.attachments[0].Name });
+            _player.Money -= _weaponAttachments.Attachments[0].Cost;
+            _weaponController.Handgun.Attachments.Add(new Attachment() { Name = _weaponAttachments.Attachments[0].Name });
             _bus.Fire(new AttachmentBought());
-            SaveManager.Instance.SaveHandgunRedDotPurchase(_weaponAttachments.attachments[0].Name);
+            SaveManager.Instance.SaveHandgunRedDotPurchase(_weaponAttachments.Attachments[0].Name);
         }
     }
 
     public void BuyShotgunsScope()
     {
-        if (_player.Money >= _weaponAttachments.attachments[1].Cost)
+        if (_player.Money >= _weaponAttachments.Attachments[1].Cost)
         {
-            _player.Money -= _weaponAttachments.attachments[1].Cost;
-            _weaponController.Shotgun.Attachments.Add(new Attachment() { Name = _weaponAttachments.attachments[1].Name });
+            _player.Money -= _weaponAttachments.Attachments[1].Cost;
+            _weaponController.Shotgun.Attachments.Add(new Attachment() { Name = _weaponAttachments.Attachments[1].Name });
             _bus.Fire(new AttachmentBought());
-            SaveManager.Instance.SaveShotgunScopePurchase(_weaponAttachments.attachments[1].Name);
+            SaveManager.Instance.SaveShotgunScopePurchase(_weaponAttachments.Attachments[1].Name);
         }
     }
 
     public void BuyMachinegunScope()
     {
-        if (_player.Money >= _weaponAttachments.attachments[2].Cost)
+        if (_player.Money >= _weaponAttachments.Attachments[2].Cost)
         {
-            _player.Money -= _weaponAttachments.attachments[2].Cost;
-            _weaponController.Machinegun.Attachments.Add(new Attachment() { Name = _weaponAttachments.attachments[2].Name });
+            _player.Money -= _weaponAttachments.Attachments[2].Cost;
+            _weaponController.Machinegun.Attachments.Add(new Attachment() { Name = _weaponAttachments.Attachments[2].Name });
             _bus.Fire(new AttachmentBought());
-            SaveManager.Instance.SaveMachinegunScopePurchase(_weaponAttachments.attachments[2].Name);
+            SaveManager.Instance.SaveMachinegunScopePurchase(_weaponAttachments.Attachments[2].Name);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Base.View
         private readonly Color _noAmmoLeftColor = Color.red;
         private readonly Color _hasAmmoColor = Color.white;
 
-        
         [Inject]
         public void Init(WeaponController weaponController, SignalBus bus)
         {

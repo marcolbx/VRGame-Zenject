@@ -1,7 +1,6 @@
 using Base.Handler;
 using Base.Controller;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Base.View
@@ -14,6 +13,7 @@ namespace Base.View
         Store,
         Menu,
     }
+
     public class SceneView : MonoBehaviour
     {
         [SerializeField] private AudioSource _playSound;
@@ -61,11 +61,11 @@ namespace Base.View
             }
             else if (_interactionType == VRInteraction.Stats)
             {
-                SceneManager.LoadScene("StatsScene");
+                _sceneHandler.LoadStats();
             }
             else if (_interactionType == VRInteraction.Store)
             {
-                SceneManager.LoadScene("StoreScene");
+                _sceneHandler.LoadStore();
             }
             else if (_interactionType == VRInteraction.Menu)
             {

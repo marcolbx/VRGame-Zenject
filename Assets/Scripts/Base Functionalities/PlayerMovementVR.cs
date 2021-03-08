@@ -49,8 +49,5 @@ public class PlayerMovementVR : MonoBehaviour
         Vector3 _velocity2 = _currentDirection * _speed * _movebool;
 
         _playerMotor.Move(_velocity2);
-
-        float _yRot = _camera.eulerAngles.x;
-        Vector3 _rotation = new Vector3(_yRot, 0f, 0f);
     }
 }

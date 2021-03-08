@@ -21,12 +21,14 @@ namespace Base.View
         private Color _defaultColor => Color.white;
 
         private ControlsController _controlsController;
+        private SignalBus _bus;
 
         [Inject]
         public void Init(ControlsController controlsController, SignalBus bus)
         {
             _controlsController = controlsController;
-            bus.Subscribe<DataLoaded>(OnDataLoaded);
+            _bus = bus;
+            _bus.Subscribe<DataLoaded>(OnDataLoaded);
         }
 
         public void OnPointerEnter()
@@ -51,6 +53,8 @@ namespace Base.View
         {
             _controlText.color = _selectedColor;
             _otherControlText.color = _defaultColor;
+
+            _bus.Fire(new ControlSelected());
         }
 
         private void OnDataLoaded()
