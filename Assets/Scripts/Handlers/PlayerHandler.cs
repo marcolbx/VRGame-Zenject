@@ -38,16 +38,15 @@ namespace Base.Handler
             if (_weaponController.IsPlayerReloading)
                 return;
 
-            // Debug.Log("HasAMMo??: !HasAmmo: " + _weaponController.HasAmmo);
-            // if (!_weaponController.HasAmmo)
-            //     return;
-
             if (!_weaponController.CanShoot)
             {
                 Debug.Log("Inside !CanShoot");
                 _weaponController.Reload();
                 return;
             }
+
+            if (!_weaponController.HasAmmo)
+                return;
 
             if (_controlsController.InputCondition() || Input.GetButtonDown("Fire1"))
             {

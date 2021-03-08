@@ -5,7 +5,13 @@ public class PositionHelper : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Transform _player;
     private Quaternion _lastRotation;
-    void Update()
+
+    private void Update()
+    {
+        CalculatePosition();
+    }
+
+    private void CalculatePosition()
     {
         if (_camera.transform.eulerAngles.x > 20 && _camera.transform.eulerAngles.x < 25) //Creo el vector de la ultima rotacion antes de 50 grados
             _lastRotation = Quaternion.Euler(90f, _camera.transform.eulerAngles.y, _camera.transform.eulerAngles.z);
