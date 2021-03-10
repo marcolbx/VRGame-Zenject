@@ -43,14 +43,15 @@ public class CameraPointer : MonoBehaviour
                // _gazedAtObject?.SendMessage("OnPointerExit");
                 _gazedAtObject = hit.transform.gameObject;
 
-                if (hit.collider.CompareTag("Weapon") || hit.collider.CompareTag("VirtualButton"))
+                if ((hit.collider.CompareTag("Weapon") || hit.collider.CompareTag("VirtualButton")) && !_gazedAtObject.CompareTag("Bounds"))
                     _gazedAtObject.SendMessage("OnPointerEnter");
             }
         }
         else
         {
             // No GameObject detected in front of the camera.
-            //_gazedAtObject?.SendMessage("OnPointerExit");
+            if (_gazedAtObject != null && !_gazedAtObject.CompareTag("Bounds"))
+                _gazedAtObject?.SendMessage("OnPointerExit");
             _gazedAtObject = null;
         }
 

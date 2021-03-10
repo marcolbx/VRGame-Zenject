@@ -49,7 +49,7 @@ namespace Base.Controller
                 _playerStats.SurvivalHighestKillCount = _playerStats.HighestKillEphemeralCounter;
         }
 
-        public void ResetEphemeral()
+        public void ResetEphemeralKillCounter()
         {
             _playerStats.HighestKillEphemeralCounter = 0;
         }

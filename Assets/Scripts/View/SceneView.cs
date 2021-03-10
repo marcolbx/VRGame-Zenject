@@ -12,6 +12,7 @@ namespace Base.View
         Stats,
         Store,
         Menu,
+        GunMode,
     }
 
     public class SceneView : MonoBehaviour
@@ -36,14 +37,14 @@ namespace Base.View
             HandleInteractions();
         }
 
-        public void OnPointerEnter()
-        {
-            if (_controlsController.CurrentControl == 1)
-                return;
-            HandleInteractions();
-        }
+        // public void OnPointerEnter()
+        // {
+        //     if (_controlsController.CurrentControl == 1)
+        //         return;
+        //    // HandleInteractions();
+        // }
 
-        private void HandleInteractions()
+        public void HandleInteractions()
         {
             if (_playSound != null)
                 _playSound.Play();
@@ -70,6 +71,10 @@ namespace Base.View
             else if (_interactionType == VRInteraction.Menu)
             {
                 _sceneHandler.ReturnToMain();
+            }
+            else if (_interactionType == VRInteraction.GunMode)
+            {
+                _sceneHandler.LoadGunMode();
             }
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4242462111193756726}
   - component: {fileID: 4242462111193756683}
   - component: {fileID: 4242462111193756682}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: MachinegunAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

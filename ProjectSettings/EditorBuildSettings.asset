@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StoreScene.unity
     guid: 266b6068cca79ef489bd6bf2e087f15e
+  - enabled: 0
+    path: Assets/Scenes/GunMode.unity
+    guid: cc33933306782824abed96a31626c5c9
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7103d20ace8e6e44d94182e0119aeea1,
       type: 2}

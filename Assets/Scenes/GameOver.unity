@@ -795,6 +795,7 @@ GameObject:
   - component: {fileID: 464066012}
   - component: {fileID: 464066011}
   - component: {fileID: 464066010}
+  - component: {fileID: 464066014}
   m_Layer: 5
   m_Name: '[TMP] Exit To Menu'
   m_TagString: VirtualButton
@@ -946,6 +947,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464066008}
   m_CullTransparentMesh: 1
+--- !u!114 &464066014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464066008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174b738184251d548acab458bbb9988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneView: {fileID: 464066010}
+  _gazeTime: 2
 --- !u!1 &479364096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,7 +1318,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.99341923, b: 0.97547174, a: 1}
-  m_Intensity: 14
+  m_Intensity: 12
   m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1776,6 +1791,7 @@ GameObject:
   - component: {fileID: 1006687685}
   - component: {fileID: 1006687684}
   - component: {fileID: 1006687683}
+  - component: {fileID: 1006687687}
   m_Layer: 5
   m_Name: '[TMP] Exit To Menu'
   m_TagString: VirtualButton
@@ -1927,6 +1943,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006687681}
   m_CullTransparentMesh: 1
+--- !u!114 &1006687687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006687681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174b738184251d548acab458bbb9988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneView: {fileID: 464066010}
+  _gazeTime: 2
 --- !u!1001 &1013065874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2066,6 +2096,7 @@ GameObject:
   - component: {fileID: 1048206667}
   - component: {fileID: 1048206666}
   - component: {fileID: 1048206665}
+  - component: {fileID: 1048206669}
   m_Layer: 5
   m_Name: '[TMP] Exit To Menu'
   m_TagString: VirtualButton
@@ -2217,6 +2248,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048206663}
   m_CullTransparentMesh: 1
+--- !u!114 &1048206669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048206663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174b738184251d548acab458bbb9988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneView: {fileID: 464066010}
+  _gazeTime: 2
 --- !u!1 &1130946256
 GameObject:
   m_ObjectHideFlags: 0
@@ -3845,6 +3890,7 @@ GameObject:
   - component: {fileID: 1616334706}
   - component: {fileID: 1616334708}
   - component: {fileID: 1616334709}
+  - component: {fileID: 1616334710}
   m_Layer: 5
   m_Name: '[TMP] Exit To Menu'
   m_TagString: VirtualButton
@@ -3996,6 +4042,20 @@ MonoBehaviour:
   _playSound: {fileID: 0}
   _fadeAnimator: {fileID: 0}
   _interactionType: 4
+--- !u!114 &1616334710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616334704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174b738184251d548acab458bbb9988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneView: {fileID: 464066010}
+  _gazeTime: 2
 --- !u!1 &1656950419
 GameObject:
   m_ObjectHideFlags: 0

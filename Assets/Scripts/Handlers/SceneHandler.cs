@@ -27,11 +27,21 @@ namespace Base.Handler
         public async void LoadSurvival()
         {
             _playerController.ResetHealth();
-            _playerStatsController.ResetEphemeral();
+            _playerStatsController.ResetEphemeralKillCounter();
             _weaponController.InitialAmmoSurvivalMode();
 
             await Task.Delay(4000);
             SceneManager.LoadScene(1);
+        }
+
+        public async void LoadGunMode()
+        {
+            _playerController.ResetHealth();
+            _playerStatsController.ResetEphemeralKillCounter();
+            _weaponController.InitialAmmoSurvivalMode();
+
+            await Task.Delay(4000);
+            SceneManager.LoadScene("GunMode");
         }
 
         public async void LoadStore()
