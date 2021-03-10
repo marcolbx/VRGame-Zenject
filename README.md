@@ -1,5 +1,4 @@
 # FPS Invasion VR (Android)
- VRGame-Zenject 
  
 Welcome to my sample code project. 
 
